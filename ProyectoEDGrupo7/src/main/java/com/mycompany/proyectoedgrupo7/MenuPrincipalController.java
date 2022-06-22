@@ -28,6 +28,8 @@ public class MenuPrincipalController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try{
+            //Tener una CircularLinkedList para simular la repeticion de las imagenes
+            
             String filename = "archivos/imagenesMainMenu/dogo.jpg";
             Image image = new Image(new FileInputStream(filename));
             imgviewFotoMenuPrincipal.setImage(image);
@@ -74,7 +76,8 @@ public class MenuPrincipalController implements Initializable {
     }
 
     @FXML
-    private void switchToCrearNuevoAlbum(ActionEvent event) {
+    private void switchToCrearNuevoAlbum(ActionEvent event) throws IOException {
+        App.setRoot("crearAlbum");
     }
 
 }

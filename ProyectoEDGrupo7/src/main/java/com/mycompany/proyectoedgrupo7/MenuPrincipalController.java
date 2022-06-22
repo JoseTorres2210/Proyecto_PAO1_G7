@@ -5,20 +5,23 @@
  */
 package com.mycompany.proyectoedgrupo7;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
+import javafx.scene.image.ImageView;
 /**
  * FXML Controller class
  *
  * @author Det-Pc
  */
-public class PantallaInicioController implements Initializable {
+public class MenuPrincipalController implements Initializable {
 
+
+    @FXML
+    private ImageView imgviewFotoMenuPrincipal;
     /**
      * Initializes the controller class.
      */
@@ -28,9 +31,15 @@ public class PantallaInicioController implements Initializable {
     }    
     
     @FXML
-    private void switchToMenuPrincipal(ActionEvent event) throws IOException{
-        System.out.println("Cambio al menu principal");
-        App.setRoot("menuPrincipal");
+    private void switchToAgregarFoto(ActionEvent event) {
+    }
+
+    @FXML
+    private void switchToAlbumes(ActionEvent event) {
+    }
+
+    @FXML
+    private void switchToCrearNuevoAlbum(ActionEvent event) {
     }
 
 }

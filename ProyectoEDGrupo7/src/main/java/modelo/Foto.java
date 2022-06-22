@@ -71,6 +71,13 @@ public class Foto {
         this.persona = persona;
     }
 
+    @Override
+    public String toString() {
+        return "Foto{" + "fecha=" + fecha + ", lugar=" + lugar + ", descripcion=" + descripcion + ", nomAlbum=" + nomAlbum + ", imagen=" + imagen + ", persona=" + persona + '}';
+    }
+    
+    
+
 
 
 

@@ -16,11 +16,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
 
 import javafx.scene.image.ImageView;
-/**
- * FXML Controller class
- *
- * @author Det-Pc
- */
+
 public class MenuPrincipalController implements Initializable {
 
 

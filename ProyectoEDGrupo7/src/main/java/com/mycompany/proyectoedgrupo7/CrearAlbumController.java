@@ -47,53 +47,7 @@ public class CrearAlbumController implements Initializable {
     
     @FXML
     private void crearAlbum(ActionEvent event) throws IOException{
-        /*
-        ##########################################
-        LOGICA PARA LA CREACION DE UN NUEVO ALBUM
-        ##########################################
-        */
-        
-        //Se recupera la informacion ingresada:
-        try{
-            String nombreAlbum = txtNombreAlbum.getText();
-            String descripcionAlbum = txtDescripcionAlbum.getText();
-
-            if(nombreAlbum.equals("")||descripcionAlbum.equals("")){
-                throw new NullPointerException();
-            }
-            
-            if(!(direccionImagen==null)){
-                Album album = new Album(nombreAlbum, descripcionAlbum);
-                album.setFotoPortada(direccionImagen);
-                Alert exito = new Alert(Alert.AlertType.INFORMATION, "Su álbum ha sido creada de manera exitosa");
-                exito.setTitle("Exito");
-                exito.setHeaderText("Operacion exitosa");
-                exito.show();
-                App.setRoot("menuPrincipal");  
-            }else{
-                System.out.println("Se pide confirmacion indicando que se colocara la foto por defecto");
-                Alert confirmacionFotoDefault = new Alert(Alert.AlertType.CONFIRMATION);
-                confirmacionFotoDefault.setTitle("Confirmación");
-                confirmacionFotoDefault.setHeaderText("Se procederá a agregar una foto por defecto para la portada de su álbum");
-                confirmacionFotoDefault.setContentText("Está usted de acuerdo?");
-                
-                Optional<ButtonType> result = confirmacionFotoDefault.showAndWait();
-                if(result.get()==ButtonType.OK){
-                    //Se crea el objeto con la imagen default
-                    Album album = new Album(nombreAlbum, descripcionAlbum);
-                    album.setFotoPortada("defaultPic.png");          
-                    //Aqui se debe escribir al album en el archivo serializado
-                    App.setRoot("menuPrincipal");                    
-                }
-            }
-            
-            }catch(NullPointerException e){
-                System.out.println("No se llenaron todos los campos: ");
-                Alert alerta = new Alert(Alert.AlertType.ERROR,"Asegúrese de llenar todos los campos"); //FIXME
-                alerta.setTitle("Error");
-                alerta.setHeaderText("Ha ocurrido un error:");
-                alerta.show();  
-            }
+        creacionDeAlbum();
     }
 
     @FXML
@@ -179,6 +133,60 @@ public class CrearAlbumController implements Initializable {
             }
             }
         }
+    }
+    
+    
+    
+    
+    
+    private void creacionDeAlbum() throws IOException{
+        /*
+        ##########################################
+        LOGICA PARA LA CREACION DE UN NUEVO ALBUM
+        ##########################################
+        */
+        
+        //Se recupera la informacion ingresada:
+        try{
+            String nombreAlbum = txtNombreAlbum.getText();
+            String descripcionAlbum = txtDescripcionAlbum.getText();
+
+            if(nombreAlbum.equals("")||descripcionAlbum.equals("")){
+                throw new NullPointerException();
+            }
+            
+            if(!(direccionImagen==null)){
+                Album album = new Album(nombreAlbum, descripcionAlbum);
+                album.setFotoPortada(direccionImagen);
+                Alert exito = new Alert(Alert.AlertType.INFORMATION, "Su álbum ha sido creada de manera exitosa");
+                exito.setTitle("Exito");
+                exito.setHeaderText("Operacion exitosa");
+                exito.show();
+                App.setRoot("menuPrincipal");  
+            }else{
+                System.out.println("Se pide confirmacion indicando que se colocara la foto por defecto");
+                Alert confirmacionFotoDefault = new Alert(Alert.AlertType.CONFIRMATION);
+                confirmacionFotoDefault.setTitle("Confirmación");
+                confirmacionFotoDefault.setHeaderText("Se procederá a agregar una foto por defecto para la portada de su álbum");
+                confirmacionFotoDefault.setContentText("Está usted de acuerdo?");
+                
+                Optional<ButtonType> result = confirmacionFotoDefault.showAndWait();
+                if(result.get()==ButtonType.OK){
+                    //Se crea el objeto con la imagen default
+                    Album album = new Album(nombreAlbum, descripcionAlbum);
+                    album.setFotoPortada("defaultPic.png");          
+                    //Aqui se debe escribir al album en el archivo serializado
+                    App.setRoot("menuPrincipal");                    
+                }
+            }
+            
+            }catch(NullPointerException e){
+                System.out.println("No se llenaron todos los campos: ");
+                Alert alerta = new Alert(Alert.AlertType.ERROR,"Asegúrese de llenar todos los campos"); //FIXME
+                alerta.setTitle("Error");
+                alerta.setHeaderText("Ha ocurrido un error:");
+                alerta.show();  
+            }
     }
 
 }

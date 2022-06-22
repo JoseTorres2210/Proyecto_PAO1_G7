@@ -68,7 +68,8 @@ public class MenuPrincipalController implements Initializable {
     }    
     
     @FXML
-    private void switchToAgregarFoto(ActionEvent event) {
+    private void switchToAgregarFoto(ActionEvent event) throws IOException{
+        App.setRoot("crearFoto");
     }
 
     @FXML

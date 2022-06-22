@@ -7,6 +7,8 @@ package com.mycompany.proyectoedgrupo7;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
 /**
@@ -24,4 +26,9 @@ public class PantallaInicioController implements Initializable {
         // TODO
     }    
     
+    @FXML
+    private void switchToMenuPrincipal(ActionEvent event) {
+        System.out.println("Cambio al menu principal");
+    }
+
 }

@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="bodybg" stylesheets="@backgrounds/backgroundInicial.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="bodybg" stylesheets="@backgrounds/backgroundInicial.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.proyectoedgrupo7.PantallaInicioController">
    <top>
       <Label text="Data Structures Photo Booth" BorderPane.alignment="CENTER">
          <font>
@@ -29,7 +29,7 @@
    <bottom>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" prefHeight="33.0" prefWidth="113.0" text="Start">
+            <Button mnemonicParsing="false" onAction="#switchToMenuPrincipal" prefHeight="33.0" prefWidth="113.0" text="Start">
                <font>
                   <Font name="Calibri" size="18.0" />
                </font>

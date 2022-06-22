@@ -12,11 +12,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
-/**
- * FXML Controller class
- *
- * @author Det-Pc
- */
 public class PantallaInicioController implements Initializable {
 
     /**

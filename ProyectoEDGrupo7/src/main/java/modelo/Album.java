@@ -81,4 +81,14 @@ public class Album {
     
     
     
+    /*
+    Metodo para escribir o agregar un album a un archivo serializado
+    */
+    
+    public void agregarAlbum(){
+        
+    }
+    
+    
+    
 }

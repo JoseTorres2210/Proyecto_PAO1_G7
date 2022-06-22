@@ -30,7 +30,7 @@ public class MenuPrincipalController implements Initializable {
         try{
             //Tener una CircularLinkedList para simular la repeticion de las imagenes
             
-            String filename = "archivos/imagenesMainMenu/dogo.jpg";
+            String filename = "archivos/imagenesMainMenu/dogo.jpg"; //<---- PROVISIONAL, se debe cambiar por hilos
             Image image = new Image(new FileInputStream(filename));
             imgviewFotoMenuPrincipal.setImage(image);
         }catch (FileNotFoundException ex) {

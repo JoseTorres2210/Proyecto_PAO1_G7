@@ -1,6 +1,8 @@
 package TDAs;
 
-public class ArrayList<E> implements List<E>{
+import java.util.Iterator;
+
+public class ArrayList<E> implements List<E>,Iterable<E>{
     private int capacity= 100;
     private E[] elements=null;
     private int effectiveSize= 0;
@@ -122,6 +124,25 @@ public class ArrayList<E> implements List<E>{
         E oldElement= elements[index];
         elements[index]=element;
         return oldElement;
+    }
+
+    @Override
+    public Iterator<E> iterator() {
+        Iterator<E> it=new Iterator<E>(){
+            
+            int pointer=0;
+            public boolean hasNext() {
+                return pointer<effectiveSize-1;
+            }
+
+            @Override
+            public E next() {
+                E element= elements[pointer++];
+                return element;
+            }
+            
+        };
+        return it;
     }
     
 

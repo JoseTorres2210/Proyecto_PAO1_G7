@@ -1,9 +1,11 @@
 
 package TDAs;
 
+import java.util.Iterator;
 
 
-public class LinkedList<E> implements List<E>{
+
+public class LinkedList<E> implements List<E>,Iterable<E>{
     private NodeList<E> first;
     private NodeList<E> last;
     
@@ -253,6 +255,27 @@ public class LinkedList<E> implements List<E>{
             }
         }
         return retorno;
+    }
+
+    @Override
+    public Iterator<E> iterator() {
+        Iterator<E> it=new Iterator<E>(){
+            
+            NodeList<E> pointer=first;
+            public boolean hasNext() {
+                return pointer.getNext()!=null;
+                
+            }
+
+            @Override
+            public E next() {
+                E e=pointer.getContent();
+                pointer=pointer.getNext();
+                return e;
+            }
+            
+        };
+        return it;
     }
     
     

@@ -10,7 +10,7 @@ package TDAs;
  */
 public class CircularDoublyLinkedList<E> implements List<E> {
     
-    private Node<E> first;
+    private CircularNode<E> first;
     
     public CircularDoublyLinkedList(){
         first=null;
@@ -18,7 +18,7 @@ public class CircularDoublyLinkedList<E> implements List<E> {
 
     @Override
     public boolean addFirst(E element) {
-        Node<E> nodo = new Node<>(element);
+        CircularNode<E> nodo = new CircularNode<>(element);
         if(element==null)
             return false;
         else if(isEmpty()){
@@ -27,7 +27,7 @@ public class CircularDoublyLinkedList<E> implements List<E> {
             first.setPrevious(first);
         }
         else{
-            Node<E> last=first.getPrevious();
+            CircularNode<E> last=first.getPrevious();
             nodo.setNext(first);
             first.setPrevious(nodo);
             last.setNext(nodo);
@@ -37,13 +37,13 @@ public class CircularDoublyLinkedList<E> implements List<E> {
         return true;
     }
     
-    public Node<E> getFirst() {
+    public CircularNode<E> getFirst() {
         return first;
     }
     
     @Override
     public boolean addLast(E element) {
-        Node<E> nodo = new Node<>(element);
+        CircularNode<E> nodo = new CircularNode<>(element);
         if(element==null)
             return false;
         else if(isEmpty()){
@@ -53,7 +53,7 @@ public class CircularDoublyLinkedList<E> implements List<E> {
             
         }
         else{
-            Node<E> last=first.getPrevious();
+            CircularNode<E> last=first.getPrevious();
             nodo.setNext(first);
             first.setPrevious(nodo);
             nodo.setPrevious(last);
@@ -74,13 +74,13 @@ public class CircularDoublyLinkedList<E> implements List<E> {
             return null;
         }
         else if(first.getNext()==first){
-            E tmp=first.getData();
+            E tmp=first.getContent();
             first=null;
             return tmp;  
         }
         else{
-            E tmp=first.getData();
-            Node<E> last=first.getPrevious();
+            E tmp=first.getContent();
+            CircularNode<E> last=first.getPrevious();
             first=first.getNext();
             first.setPrevious(last);
             last.setNext(first);
@@ -95,13 +95,13 @@ public class CircularDoublyLinkedList<E> implements List<E> {
             return null;
         }
         else if(first.getNext()==first){
-            E tmp=first.getData();
+            E tmp=first.getContent();
             first=null;
             return tmp;  
         }
         else{ 
-            Node<E> last=first.getPrevious();
-            E tmp=last.getData();
+            CircularNode<E> last=first.getPrevious();
+            E tmp=last.getContent();
             last=last.getPrevious();
             first.setPrevious(last);
             last.setNext(first);
@@ -113,7 +113,7 @@ public class CircularDoublyLinkedList<E> implements List<E> {
     @Override
     public int size() {
         int counter=0;
-        Node<E> t=first;
+        CircularNode<E> t=first;
         if(first!=null){
             
             do{
@@ -138,9 +138,9 @@ public class CircularDoublyLinkedList<E> implements List<E> {
             this.addFirst(element);
         }
         else if(!isEmpty() && element!=null && index<=size()){
-            Node<E> node= new Node(element);
+            CircularNode<E> node= new CircularNode(element);
             int counter=0;
-            Node<E> pointer=first;
+            CircularNode<E> pointer=first;
             while(index>counter){
                 if(pointer.getNext()!=null){
                     pointer=pointer.getNext();
@@ -162,21 +162,21 @@ public class CircularDoublyLinkedList<E> implements List<E> {
             return null;
         }
         if(index==0){
-            E content=first.getData();
+            E content=first.getContent();
             this.removeFirst();
             return content;
         }
         else if(!isEmpty() || index<=size()){
             int counter=0;
-            Node<E> node=this.first;
-            Node<E> previous=this.first;
+            CircularNode<E> node=this.first;
+            CircularNode<E> previous=this.first;
             
             while(counter!=index){
                 previous=node;
                 node=node.getNext();
                 counter++;
             }
-            E content=node.getData();
+            E content=node.getContent();
             previous.setNext(node.getNext());
             node.getNext().setPrevious(previous);
             return content;
@@ -187,16 +187,16 @@ public class CircularDoublyLinkedList<E> implements List<E> {
     @Override
     public E get(int index) {
         if(!isEmpty() && index==0){
-            return first.getData();
+            return first.getContent();
         }
         else if(!isEmpty() && index<=size()){
-            Node<E> pointer=first;
+            CircularNode<E> pointer=first;
             int counter=0;
             while(counter!=index){
                 pointer=pointer.getNext();
                 counter++;
             }
-            return pointer.getData();
+            return pointer.getContent();
         }
         return null;
     }
@@ -204,19 +204,19 @@ public class CircularDoublyLinkedList<E> implements List<E> {
     @Override
     public E set(int index, E element) {
         if(!isEmpty() && index==0){
-            E content=first.getData();
-            first.setData(element);
+            E content=first.getContent();
+            first.setContent(element);
             return content;
         }
         else if(!isEmpty() && index<=size() && element!=null){
-            Node<E> pointer=first;
+            CircularNode<E> pointer=first;
             int counter=0;
             while(counter!=index){
                 pointer=pointer.getNext();
                 counter++;
             }
-            E content=pointer.getData();
-            pointer.setData(element);
+            E content=pointer.getContent();
+            pointer.setContent(element);
             return content;
         }
         return null;
@@ -225,11 +225,11 @@ public class CircularDoublyLinkedList<E> implements List<E> {
     
     public String toString() {
         String s = "";
-        Node<E> t=first;
+        CircularNode<E> t=first;
         if(first!=null){
             
             do{
-               s += t.getData() + " ";
+               s += t.getContent() + " ";
                t=t.getNext();
                
             

@@ -5,6 +5,8 @@
  */
 package com.mycompany.proyectoedgrupo7;
 
+import com.mycompany.proyectoedgrupo7.App;
+import com.mycompany.proyectoedgrupo7.App;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;

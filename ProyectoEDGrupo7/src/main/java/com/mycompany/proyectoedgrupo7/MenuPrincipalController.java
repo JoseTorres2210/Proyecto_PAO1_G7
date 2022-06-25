@@ -73,7 +73,8 @@ public class MenuPrincipalController implements Initializable {
     }
 
     @FXML
-    private void switchToAlbumes(ActionEvent event) {
+    private void switchToAlbumes(ActionEvent event) throws IOException {
+        App.setRoot("visualizarAlbumes");
     }
 
     @FXML

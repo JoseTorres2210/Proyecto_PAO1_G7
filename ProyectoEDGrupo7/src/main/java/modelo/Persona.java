@@ -5,7 +5,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 public class Persona {
-    public static ArrayList<Persona> listaPersonas;
+    public ArrayList<Foto> listaFotosAparicion;
     
     private String nombre;
     private String apellido;
@@ -19,6 +19,15 @@ public class Persona {
     public Persona(String nombre, String apellido){
         this.nombre = nombre;
         this.apellido = apellido;
+        this.listaFotosAparicion = new ArrayList<>();
+        this.asignarid();
+    }
+    
+    //Constructor que recibe la lista de fotos donde aparece esa persona
+    public Persona(String nombre, String apellido, ArrayList<Foto> listaFotosAparicion){
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.listaFotosAparicion = listaFotosAparicion;
         this.asignarid();
     }
     
@@ -36,6 +45,7 @@ public class Persona {
         this.id = idCount; //Esto garantiza que el id es unico
         */
     }
+    
 
     @Override
     public boolean equals(Object obj) {
@@ -49,11 +59,15 @@ public class Persona {
             return false;
         }
         final Persona other = (Persona) obj;
-        if (!Objects.equals(this.id, other.id)) {
+        if (!Objects.equals(this.nombre, other.nombre)) {
+            return false;
+        }
+        if (!Objects.equals(this.apellido, other.apellido)) {
             return false;
         }
         return true;
     }
+
     
     
     
@@ -79,6 +93,9 @@ public class Persona {
     public void setApellido(String apellido) {
         this.apellido = apellido;
     }
+    
+    
+    
         
     
 }

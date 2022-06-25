@@ -1,8 +1,12 @@
 
 package modelo;
+import TDAs.ArrayList;
+import java.util.Objects;
 import java.util.UUID;
 
 public class Persona {
+    public static ArrayList<Persona> listaPersonas;
+    
     private String nombre;
     private String apellido;
     /*
@@ -18,11 +22,7 @@ public class Persona {
         this.asignarid();
     }
     
-    public Persona(String nombre){
-        this.nombre = nombre;
-        this.apellido = ""; //Volvemos el apellido un String vacio
-        this.asignarid();
-    }
+    
     
     //Metodo para generar id aleatoria
     
@@ -36,6 +36,26 @@ public class Persona {
         this.id = idCount; //Esto garantiza que el id es unico
         */
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Persona other = (Persona) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        return true;
+    }
+    
+    
     
     
     //Getters and setters

@@ -1,17 +1,18 @@
 package modelo;
+import TDAs.ArrayList;
 import java.util.Date;
 
 public class Foto {
-    //private ArrayList<Persona> personas;
+    private ArrayList<Persona> personas;
     private Date fecha;
     private String lugar;
     private String descripcion;
     private String nomAlbum;
     private String imagen;
-    private Persona persona;
+    //private Persona persona;
 
-    public Foto(Persona persona, Date fecha, String lugar,String descripcion){
-        this.persona= persona;
+    public Foto(ArrayList<Persona> personas, Date fecha, String lugar,String descripcion){
+        this.personas= personas;
         this.fecha=fecha;
         this.lugar=lugar;
         this.descripcion=descripcion;
@@ -63,17 +64,33 @@ public class Foto {
         this.imagen = imagen;
     }
 
-    public Persona getPersona() {
-        return persona;
+    public ArrayList<Persona> getPersonas() {
+        return personas;
     }
 
-    public void setPersona(Persona persona) {
-        this.persona = persona;
+    public void setPersona(ArrayList<Persona> personas) {
+        this.personas = personas;
+    }
+    
+    
+    public boolean agregarPersonaEnFoto(Persona persona){
+        boolean retorno = false;
+        //Debemos agregar una persona a una foto SOLO SI ESTA NO SE ENCUENTRA EN LA LISTA PREVIAMENTE
+        for(Persona p : personas){
+            if(!p.equals(persona)){
+                //La agregamos a la lista
+                personas.addLast(persona);
+                retorno =  true;
+            }else{
+                System.out.println("LA PERSONA YA ESTA EN LA LISTAAAAA");
+            }
+        }
+        return retorno;
     }
 
     @Override
     public String toString() {
-        return "Foto{" + "fecha=" + fecha + ", lugar=" + lugar + ", descripcion=" + descripcion + ", nomAlbum=" + nomAlbum + ", imagen=" + imagen + ", persona=" + persona + '}';
+        return "Foto{" + "fecha=" + fecha + ", lugar=" + lugar + ", descripcion=" + descripcion + ", nomAlbum=" + nomAlbum + ", imagen=" + imagen + ", persona=" + personas + '}';
     }
     
     

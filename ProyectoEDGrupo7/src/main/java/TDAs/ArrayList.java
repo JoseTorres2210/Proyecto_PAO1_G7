@@ -145,6 +145,15 @@ public class ArrayList<E> implements List<E>,Iterable<E>{
         return it;
     }
     
+    
+    public String toString(){
+        String s = "[";
+        for(int i = 0;i<this.size();i++){
+            s+=elements[i]+" ";
+        }
+        return s+"]";
+    }
+    
 
     
 }

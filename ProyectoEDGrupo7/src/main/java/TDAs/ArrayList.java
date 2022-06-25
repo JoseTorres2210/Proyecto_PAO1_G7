@@ -1,8 +1,9 @@
 package TDAs;
 
+import java.io.Serializable;
 import java.util.Iterator;
 
-public class ArrayList<E> implements List<E>,Iterable<E>{
+public class ArrayList<E> implements List<E>,Iterable<E>,Serializable{
     private int capacity= 100;
     private E[] elements=null;
     private int effectiveSize= 0;

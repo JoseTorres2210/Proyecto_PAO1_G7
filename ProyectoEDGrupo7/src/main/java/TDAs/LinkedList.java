@@ -1,11 +1,12 @@
 
 package TDAs;
 
+import java.io.Serializable;
 import java.util.Iterator;
 
 
 
-public class LinkedList<E> implements List<E>,Iterable<E>{
+public class LinkedList<E> implements List<E>,Iterable<E>,Serializable{
     private NodeList<E> first;
     private NodeList<E> last;
     

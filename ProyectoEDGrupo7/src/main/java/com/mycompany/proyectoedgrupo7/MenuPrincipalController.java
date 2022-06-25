@@ -16,6 +16,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
 
 import javafx.scene.image.ImageView;
+import modelo.Persona;
 
 public class MenuPrincipalController implements Initializable {
 
@@ -28,6 +29,7 @@ public class MenuPrincipalController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try{
+
             //Tener una CircularLinkedList para simular la repeticion de las imagenes
             
             String filename = "archivos/imagenesMainMenu/dogo.jpg"; //<---- PROVISIONAL, se debe cambiar por hilos

@@ -2,6 +2,7 @@
 package modelo;
 
 import TDAs.CircularDoublyLinkedList;
+import TDAs.LinkedList;
 
 public class Album {
     private String nombre;
@@ -86,6 +87,16 @@ public class Album {
     */
     
     public void agregarAlbum(){
+        
+    }
+    
+    
+    /*
+    Metodo para GENERAR UN ARCHIVO CON VARIOS ALBUMES
+    */
+    
+    public static void crearArchivoAlbumes(String path){
+        LinkedList<Album> listaAlbumes = new LinkedList<>();
         
     }
     

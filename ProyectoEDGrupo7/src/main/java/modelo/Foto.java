@@ -22,6 +22,7 @@ public class Foto {
         this.fecha=fecha;
         this.lugar=lugar;
         this.descripcion=descripcion;
+        this.personas = null;   //Xq no hay personas en la foto
     }
 
     public Date getFecha() {

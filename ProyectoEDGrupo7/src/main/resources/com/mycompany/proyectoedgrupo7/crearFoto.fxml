@@ -77,11 +77,11 @@
                            <children>
                               <HBox alignment="BOTTOM_LEFT" prefHeight="37.0" prefWidth="255.0">
                                  <children>
-                                    <RadioButton fx:id="rbAparecenPersonas" mnemonicParsing="false" text="Si">
+                                    <RadioButton fx:id="rbAparecenPersonas" mnemonicParsing="false" onAction="#unlockButton" text="Si">
                                        <toggleGroup>
                                           <ToggleGroup fx:id="personas" />
                                        </toggleGroup></RadioButton>
-                                    <RadioButton fx:id="rbNoAparecenPersonas" mnemonicParsing="false" text="No" toggleGroup="$personas">
+                                    <RadioButton fx:id="rbNoAparecenPersonas" mnemonicParsing="false" onAction="#unlockButton" text="No" toggleGroup="$personas">
                                        <HBox.margin>
                                           <Insets left="20.0" />
                                        </HBox.margin>

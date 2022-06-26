@@ -50,9 +50,11 @@ public class CrearFotoController implements Initializable {
     /**
      * Initializes the controller class.
      */
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        buttonSeleccionarPersonas.setVisible(false);
     }    
     
     @FXML
@@ -77,5 +79,19 @@ public class CrearFotoController implements Initializable {
         PUEDA SELECCIONAR A TODAS LAS PERSONAS QUE SE DESEA AGREGAR A LA FOTO
         */
     }
+
+    @FXML
+    private void unlockButton() {
+        /*
+        Metodo para bloquear el boton de agregar personas hasta que se seleccione el 
+        radio button con el texto "Si"
+        */
+        if(rbAparecenPersonas.isSelected()){
+            buttonSeleccionarPersonas.setVisible(true);
+        }else {
+            buttonSeleccionarPersonas.setVisible(false);
+        }
+    }
+
 
 }

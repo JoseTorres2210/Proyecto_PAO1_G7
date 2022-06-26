@@ -2,6 +2,7 @@
 package TDAs;
 
 import java.io.Serializable;
+import java.util.Comparator;
 import java.util.Iterator;
 
 
@@ -278,6 +279,40 @@ public class LinkedList<E> implements List<E>,Iterable<E>,Serializable{
         };
         return it;
     }
+    
+       public List<E> findSame(Comparator<E> cmp,E anotherElement){
+        List<E> result=new LinkedList();
+        
+        for(E element:this){
+            if(cmp.compare(element, anotherElement)==0){
+                result.addLast(element);           
+            }            
+        }    
+        return result;
+    }
+    
+    public List<E> findBig(Comparator<E> cmp,E anotherElement){
+        List<E> result=new LinkedList();
+        
+        for(E element:this){
+            if(cmp.compare(element, anotherElement)>0){
+                result.addLast(element);           
+            }            
+        }    
+        return result;
+    }
+    
+    public List<E> findSmall(Comparator<E> cmp,E anotherElement){
+        List<E> result=new LinkedList();
+        
+        for(E element:this){
+            if(cmp.compare(element, anotherElement)<0){
+                result.addLast(element);           
+            }            
+        }    
+        return result;
+    }
+    
     
     
 }

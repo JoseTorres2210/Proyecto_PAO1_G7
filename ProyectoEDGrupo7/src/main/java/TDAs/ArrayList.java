@@ -1,6 +1,7 @@
 package TDAs;
 
 import java.io.Serializable;
+import java.util.Comparator;
 import java.util.Iterator;
 
 public class ArrayList<E> implements List<E>,Iterable<E>,Serializable{
@@ -145,6 +146,40 @@ public class ArrayList<E> implements List<E>,Iterable<E>,Serializable{
         };
         return it;
     }
+    
+       public List<E> findSame(Comparator<E> cmp,E anotherElement){
+        List<E> result=new ArrayList();
+        
+        for(E element:this){
+            if(cmp.compare(element, anotherElement)==0){
+                result.addLast(element);           
+            }            
+        }    
+        return result;
+    }
+    
+    public List<E> findBig(Comparator<E> cmp,E anotherElement){
+        List<E> result=new ArrayList();
+        
+        for(E element:this){
+            if(cmp.compare(element, anotherElement)>0){
+                result.addLast(element);           
+            }            
+        }    
+        return result;
+    }
+    
+    public List<E> findSmall(Comparator<E> cmp,E anotherElement){
+        List<E> result=new ArrayList();
+        
+        for(E element:this){
+            if(cmp.compare(element, anotherElement)<0){
+                result.addLast(element);           
+            }            
+        }    
+        return result;
+    }
+    
     
     
     public String toString(){

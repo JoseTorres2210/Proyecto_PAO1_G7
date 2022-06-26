@@ -1,5 +1,6 @@
 package modelo;
 import TDAs.ArrayList;
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Foto {

@@ -8,6 +8,7 @@
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -76,8 +77,11 @@
                            <children>
                               <HBox alignment="BOTTOM_LEFT" prefHeight="37.0" prefWidth="255.0">
                                  <children>
-                                    <RadioButton fx:id="rbAparecenPersonas" mnemonicParsing="false" text="Si" />
-                                    <RadioButton fx:id="rbNoAparecenPersonas" mnemonicParsing="false" text="No">
+                                    <RadioButton fx:id="rbAparecenPersonas" mnemonicParsing="false" text="Si">
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="personas" />
+                                       </toggleGroup></RadioButton>
+                                    <RadioButton fx:id="rbNoAparecenPersonas" mnemonicParsing="false" text="No" toggleGroup="$personas">
                                        <HBox.margin>
                                           <Insets left="20.0" />
                                        </HBox.margin>

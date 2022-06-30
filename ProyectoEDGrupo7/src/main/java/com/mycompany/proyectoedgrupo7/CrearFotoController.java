@@ -9,6 +9,7 @@ import com.mycompany.proyectoedgrupo7.App;
 import com.mycompany.proyectoedgrupo7.App;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -55,6 +56,7 @@ public class CrearFotoController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         buttonSeleccionarPersonas.setVisible(false);
+        
     }    
     
     @FXML

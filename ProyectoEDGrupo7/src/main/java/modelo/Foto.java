@@ -5,32 +5,32 @@ import java.util.Date;
 
 public class Foto {
     private ArrayList<Persona> personas;
-    private Date fecha;
+    private LocalDate fecha;
     private String lugar;
     private String descripcion;
     private String nomAlbum;
     private String imagen;
     //private Persona persona;
 
-    public Foto(ArrayList<Persona> personas, Date fecha, String lugar,String descripcion){
+    public Foto(ArrayList<Persona> personas, LocalDate fecha, String lugar,String descripcion){
         this.personas= personas;
         this.fecha=fecha;
         this.lugar=lugar;
         this.descripcion=descripcion;
     }
 
-    public Foto(Date fecha, String lugar,String descripcion){
+    public Foto(LocalDate fecha, String lugar,String descripcion){
         this.fecha=fecha;
         this.lugar=lugar;
         this.descripcion=descripcion;
         this.personas = null;   //Xq no hay personas en la foto
     }
 
-    public Date getFecha() {
+    public LocalDate getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
     }
 

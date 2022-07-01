@@ -5,7 +5,7 @@
  */
 package com.mycompany.proyectoedgrupo7;
 
-import TDAs.ArrayList;
+
 import com.mycompany.proyectoedgrupo7.App;
 import java.io.IOException;
 import java.net.URL;

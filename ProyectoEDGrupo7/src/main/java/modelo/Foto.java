@@ -1,9 +1,10 @@
 package modelo;
 import TDAs.ArrayList;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Date;
 
-public class Foto {
+public class Foto implements Serializable{
     private ArrayList<Persona> personas;
     private LocalDate fecha;
     private String lugar;

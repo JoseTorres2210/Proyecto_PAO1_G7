@@ -52,17 +52,15 @@ public class VisualizarAlbumesController implements Initializable {
         tcAlbumes.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         tcDescripcion.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
         ObservableList<Album> l = FXCollections.observableArrayList();
-        System.out.println("--------------------->>>>>>>>>>>");
-        System.out.println(l);
+        agregarOpciones();
         for(Album a: Album.leerArchivoAlbumes(App.pathAlbumes)){
             System.out.println(a);
             //Se los agg al ObservableList
             l.add(a);
         }
-        //##########Metodo para agregar opciones
-        //agregarOpciones();
+        System.out.println(Album.leerArchivoAlbumes(App.pathAlbumes));
         tvAlbumes.getItems().addAll(l);
-        agregarOpciones();
+        
         
     }    
     

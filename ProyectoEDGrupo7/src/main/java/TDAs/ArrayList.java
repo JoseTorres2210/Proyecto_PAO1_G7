@@ -156,7 +156,7 @@ public class ArrayList<E> implements List<E>,Iterable<E>,Serializable{
             
             int pointer=0;
             public boolean hasNext() {
-                return pointer<effectiveSize-1;
+                return pointer<effectiveSize;
             }
 
             @Override

@@ -296,7 +296,7 @@ public class LinkedList<E> implements List<E>,Iterable<E>,Serializable{
             
             NodeList<E> pointer=first;
             public boolean hasNext() {
-                return pointer.getNext()!=null;
+                return pointer!=null;
                 
             }
 

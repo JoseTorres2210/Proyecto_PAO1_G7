@@ -5,6 +5,7 @@ import java.util.Comparator;
 import java.util.Iterator;
 
 public class ArrayList<E> implements List<E>,Iterable<E>,Serializable{
+    private static final long serialVersionUID = 3410082698190728615L;
     private int capacity= 100;
     private E[] elements=null;
     private int effectiveSize= 0;

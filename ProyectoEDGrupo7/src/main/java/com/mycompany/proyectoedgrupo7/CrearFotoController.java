@@ -17,8 +17,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.util.Collection;
 import java.util.Date;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -27,14 +30,21 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import modelo.Album;
 import modelo.Foto;
+import modelo.Persona;
 /**
  * FXML Controller class
  *
@@ -62,6 +72,10 @@ public class CrearFotoController implements Initializable {
     @FXML
     private ComboBox<Album> cbAlbumes;
     private String direccionImagen;
+    @FXML
+    private BorderPane bpFoto;
+    @FXML
+    private ToggleGroup personas;
     
     /**
      * Initializes the controller class.
@@ -121,7 +135,7 @@ public class CrearFotoController implements Initializable {
             System.out.println("AGREGANDO EL ALBUM ACTUALIZADO A LA LISTA DE ALBUMES CONTENIDOS EN EL ARCHIVO");
             LinkedList<Album> l = Album.leerArchivoAlbumes(App.pathAlbumes);
             for(Album a:l){
-                if(a.equals(album)){
+                if(a.compareTo(album)==0){
                     //Son el mismo album, Se agrega la foto
                     a.agregarFoto(foto);
                 }
@@ -224,11 +238,47 @@ public class CrearFotoController implements Initializable {
     }
 
     @FXML
-    private void switchToSeleccionarPersonas(ActionEvent event) {
+    private void switchToSeleccionarPersonas(ActionEvent event) throws IOException {
+        App.setRoot("seleccionarPersonas");
         /*
         AQUI LA IDEA ES PASAR A UN LV DE PERSONAS DONDE EL USUARIO
         PUEDA SELECCIONAR A TODAS LAS PERSONAS QUE SE DESEA AGREGAR A LA FOTO
         */
+//        try{
+//            //Lista total de personas registradas en el sistema
+//            LinkedList<Persona> listaPersonas = Persona.leerArchivoPersonas(App.pathPersonas);
+//            
+//            buttonCrearFoto.setText("Seleccionar persona");
+//            buttonCrearFoto.setVisible(false);
+//            HBox hbox = new HBox(20);
+//            HBox hbox2 = new HBox(100);
+//            VBox vbox = new VBox(20);
+//            Label lblpersonasEnFoto = new Label("Personas en la foto:");
+//            Label lblpersonasRegistradas = new Label("Personas registradas:");
+//            hbox2.getChildren().addAll(lblpersonasEnFoto,lblpersonasRegistradas);
+//            
+//            bpFoto.setCenter(null);
+//            ObservableList<Persona> l = FXCollections.observableArrayList();
+//            for(Persona p: listaPersonas){
+//                System.out.println(p);
+//                //Se los agg al ObservableList
+//                l.add(p);
+//            }
+//            ListView<Persona> lvPersonas = new ListView<>();
+//            lvPersonas.getItems().setAll(l);
+//            ListView<Persona> lvPersonasEnLaFoto = new ListView<>();    //Comienza vacio
+//            LinkedList<Persona> listaPersonasCopia = Persona.leerArchivoPersonas(App.pathPersonas);
+//            
+//            for(Persona p:listaPersonas){
+//                if(pe.contains(p)){
+//                    //Se recupera el indice
+//                    int index = 
+//                }
+//            }
+//            
+//        }
+
+        
     }
     
     private void llenarCb(){
@@ -249,6 +299,9 @@ public class CrearFotoController implements Initializable {
             buttonSeleccionarPersonas.setVisible(false);
         }
     }
+    
+    
+  
 
 
 }

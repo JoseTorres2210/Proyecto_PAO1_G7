@@ -13,6 +13,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 public class Persona implements Serializable{
+    private static final long serialVersionUID = -6341945772409309375L;
     public ArrayList<Foto> listaFotosAparicion;
     
     private String nombre;
@@ -104,7 +105,7 @@ public class Persona implements Serializable{
 
     @Override
     public String toString() {
-        return "Persona{" + "nombre=" + nombre + ", apellido=" + apellido + '}';
+        return nombre + " " + apellido ;
     }
     
     
@@ -150,6 +151,35 @@ public class Persona implements Serializable{
             System.out.println("Error inesperado: "+e);
         }
         return listaPersonas;
+    }
+    
+    
+    public static void agregarNuevaPersonaArchivos(Persona persona,String path){
+        LinkedList<Persona> listaPersonas = leerArchivoPersonas(path);
+        listaPersonas.addLast(persona);
+        try(ObjectOutputStream escritor = new ObjectOutputStream(new FileOutputStream(path))){
+            //Se escribe la lista con los auspiciantes actualizada
+            escritor.writeObject(listaPersonas);
+        }catch(FileNotFoundException e){
+            System.out.println("No se encontro el archivo");
+        }catch(IOException e){
+            System.out.println("Error al escribir: "+e);
+        }catch(Exception e){
+            System.out.println("Error general");
+        }
+    }
+    
+        public static void actualizarListaPersonas(LinkedList<Persona> listaPersonas, String path){
+        try(ObjectOutputStream escritor = new ObjectOutputStream(new FileOutputStream(path))){
+           //Escribimos la nueva lista actualizada en el archivo serializado
+           escritor.writeObject(listaPersonas);
+        }catch(IOException e){
+            System.out.println("Error al escribir: "+e);
+        }catch(IndexOutOfBoundsException e){
+            System.out.println("Error con los limites al actualizar el archivo");
+        }catch(Exception e){
+            System.out.println("Error general: "+e);
+        }
     }
     
     

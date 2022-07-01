@@ -13,7 +13,7 @@ import java.io.Serializable;
 
 
 
-public class Album implements Serializable{
+public class Album implements Serializable,Comparable<Album>{
     
     private static final long serialVersionUID = 8645648745972565030L;
     private String nombre;
@@ -187,6 +187,15 @@ public class Album implements Serializable{
         }catch(Exception e){
             System.out.println("Error general: "+e);
         }
+    }
+
+    @Override
+    public int compareTo(Album o) {
+        int retorno = this.nombre.compareTo(o.nombre);
+        if(retorno ==0){
+            return this.descripcion.compareTo(o.descripcion);
+        }
+        return retorno;
     }
     
     

@@ -8,6 +8,7 @@ import java.util.Iterator;
 
 
 public class LinkedList<E> implements List<E>,Iterable<E>,Serializable{
+    private static final long serialVersionUID = -8389642343203595671L;
     private NodeList<E> first;
     private NodeList<E> last;
     

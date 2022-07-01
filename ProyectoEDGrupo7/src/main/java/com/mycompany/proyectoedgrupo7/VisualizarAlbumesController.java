@@ -127,7 +127,7 @@ public class VisualizarAlbumesController implements Initializable {
     
     
     //Metodo para eliminar un album
-    private void eliminarAlbum(Album c) {
+    private void eliminarAlbum(Album a) {
         try{
         Alert alerta = new Alert(Alert.AlertType.WARNING,"Recuerde que esta acción es irreversible. \n¿Seguro que desea continuar?");
         
@@ -145,16 +145,16 @@ public class VisualizarAlbumesController implements Initializable {
         if(result.get()==ButtonType.OK){
             //Se elimina el objeto de la lista
             LinkedList<Album> lista = Album.leerArchivoAlbumes(App.pathAlbumes);
-            System.out.println(lista.contains(c));
-            //int indice = lista.indexOf(c);
+            System.out.println(lista.contains(a));
+            int indice = lista.indexOf(a);
             System.out.println(lista);
-//            System.out.println(indice);
-//            lista.remove(indice); 
+            System.out.println(indice);
+            lista.remove(indice); 
             
             //Se actualiza el archivo
-//            Ciudad.actualizarListaCiudades(lista, "archivos/ciudades.csv");
-//            System.out.println("Se ha eliminado la ciudad: "+c);
-//            App.setRoot("administrarCiudades");
+            Album.actualizarListaAlbumes(lista, App.pathAlbumes);
+            System.out.println("Se ha eliminado el album: "+a);
+            App.setRoot("visualizarAlbumes");
 
 
         }else{

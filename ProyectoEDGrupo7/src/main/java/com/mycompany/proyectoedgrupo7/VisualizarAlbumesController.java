@@ -65,10 +65,11 @@ public class VisualizarAlbumesController implements Initializable {
     }    
     
     @FXML
-    private void switchToFiltrarFotos(ActionEvent event) {
+    private void switchToFiltrarFotos(ActionEvent event) throws IOException{
         /*
         Se pasa a una ventana de filtro para las fotos
         */
+        App.setRoot("FiltrarFotos");
     }
 
     @FXML

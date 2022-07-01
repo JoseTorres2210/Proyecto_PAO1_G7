@@ -139,6 +139,16 @@ public class ArrayList<E> implements List<E>,Iterable<E>,Serializable{
         }
         return false;
     }
+    
+    public int indexOf(E element) {
+        if(isEmpty())
+            return -1;
+        for(int i=0;i<effectiveSize;i++){
+            if(elements[i].equals(element))
+                return i;
+        }
+        return -1;
+    }
 
     @Override
     public Iterator<E> iterator() {

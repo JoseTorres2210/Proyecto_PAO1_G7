@@ -155,6 +155,9 @@ public class CrearAlbumController implements Initializable {
                 Album album = new Album(nombreAlbum, descripcionAlbum);
                 album.setFotoPortada(direccionImagen);
                 Alert exito = new Alert(Alert.AlertType.INFORMATION, "Su álbum ha sido creada de manera exitosa");
+                
+                //Se agrega el album al archivo
+                Album.agregarNuevoAlbumArchivo(album, App.pathAlbumes);
                 exito.setTitle("Exito");
                 exito.setHeaderText("Operacion exitosa");
                 exito.show();
@@ -172,6 +175,7 @@ public class CrearAlbumController implements Initializable {
                     Album album = new Album(nombreAlbum, descripcionAlbum);
                     album.setFotoPortada("defaultPic.png");          
                     //Aqui se debe escribir al album en el archivo serializado
+                    Album.agregarNuevoAlbumArchivo(album, App.pathAlbumes);
                     App.setRoot("menuPrincipal");                    
                 }
             }

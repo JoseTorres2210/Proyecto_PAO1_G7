@@ -10,7 +10,7 @@ package TDAs;
  * @author josel
  */
 
-public interface List<E> {
+public interface List<E>{
     
 
 

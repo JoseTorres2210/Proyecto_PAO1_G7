@@ -1,7 +1,9 @@
 
 package TDAs;
 
-public class CircularNode<E>{
+import java.io.Serializable;
+
+public class CircularNode<E> implements Serializable{
     private E content;
     private CircularNode<E> next;
     private CircularNode<E> previous;

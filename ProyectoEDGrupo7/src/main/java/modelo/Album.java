@@ -14,6 +14,7 @@ import java.io.Serializable;
 
 
 public class Album implements Serializable{
+    
     private static final long serialVersionUID = 8645648745972565030L;
     private String nombre;
     private String descripcion;
@@ -81,7 +82,16 @@ public class Album implements Serializable{
         return this.fotos.addLast(foto);
     }
     
-    
+    public boolean equals(Object o){
+        if(this==o){
+            return true;
+        }
+        if(o!=null&&o.getClass() == getClass()){
+            Album a = (Album) o;
+            return a.nombre.equalsIgnoreCase(this.nombre)&&a.descripcion.equals(this.descripcion);
+        }
+        return false;
+    }
     
     
 
@@ -89,6 +99,7 @@ public class Album implements Serializable{
     public String toString() {
         return nombre + ": " + descripcion;
     }
+    
     
     
     
@@ -147,6 +158,35 @@ public class Album implements Serializable{
             System.out.println("Error inesperado: "+e);
         }
         return listaAlbums;
+    }
+    
+    
+    public static void agregarNuevoAlbumArchivo(Album album,String path){
+        LinkedList<Album> listaAlbums = leerArchivoAlbumes(path);
+        listaAlbums.addLast(album);
+        try(ObjectOutputStream escritor = new ObjectOutputStream(new FileOutputStream(path))){
+            //Se escribe la lista con los auspiciantes actualizada
+            escritor.writeObject(listaAlbums);
+        }catch(FileNotFoundException e){
+            System.out.println("No se encontro el archivo");
+        }catch(IOException e){
+            System.out.println("Error al escribir: "+e);
+        }catch(Exception e){
+            System.out.println("Error general");
+        }
+    }
+    
+    public static void actualizarListaAlbumes(LinkedList<Album> listaAlbumes, String path){
+        try(ObjectOutputStream escritor = new ObjectOutputStream(new FileOutputStream(path))){
+           //Escribimos la nueva lista actualizada en el archivo serializado
+           escritor.writeObject(listaAlbumes);
+        }catch(IOException e){
+            System.out.println("Error al escribir: "+e);
+        }catch(IndexOutOfBoundsException e){
+            System.out.println("Error con los limites al actualizar el archivo");
+        }catch(Exception e){
+            System.out.println("Error general: "+e);
+        }
     }
     
     

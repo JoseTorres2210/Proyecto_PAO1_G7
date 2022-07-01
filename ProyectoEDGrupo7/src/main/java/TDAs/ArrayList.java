@@ -127,6 +127,18 @@ public class ArrayList<E> implements List<E>,Iterable<E>,Serializable{
         elements[index]=element;
         return oldElement;
     }
+    
+    public boolean contains(E element) {
+        if(element==null||isEmpty()){
+            return false;
+        }
+        for(int i =0;i<effectiveSize;i++){
+            if(elements[i]==element){
+                return true;
+            }
+        }
+        return false;
+    }
 
     @Override
     public Iterator<E> iterator() {

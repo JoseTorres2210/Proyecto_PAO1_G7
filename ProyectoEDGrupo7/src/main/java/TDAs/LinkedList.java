@@ -258,6 +258,23 @@ public class LinkedList<E> implements List<E>,Iterable<E>,Serializable{
         }
         return retorno;
     }
+    
+        public boolean contains(E element) {
+        if(isEmpty()){
+            return false;
+        }
+        else if(element==null){
+            return false;
+        }
+        else{
+            for(NodeList<E> i = first;i!=null;i=i.getNext()){
+                if(i.getContent().equals(element)){
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
 
     @Override
     public Iterator<E> iterator() {

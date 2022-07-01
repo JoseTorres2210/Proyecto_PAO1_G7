@@ -5,9 +5,13 @@
  */
 package com.mycompany.proyectoedgrupo7;
 
+import TDAs.ArrayList;
+import com.mycompany.proyectoedgrupo7.App;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -38,10 +42,18 @@ public class VisualizarAlbumesController implements Initializable {
         */
         tcAlbumes.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         tcDescripcion.setCellValueFactory(new PropertyValueFactory<>("descripcion"));
-        
-        
+        ObservableList<Album> l = FXCollections.observableArrayList();
+        System.out.println("--------------------->>>>>>>>>>>");
+        System.out.println(l);
+        for(Album a: Album.leerArchivoAlbumes(App.pathAlbumes)){
+            System.out.println(a);
+            //Se los agg al ObservableList
+            l.add(a);
+        }
         //##########Metodo para agregar opciones
         //agregarOpciones();
+        tvAlbumes.getItems().addAll(l);
+        
     }    
     
     @FXML

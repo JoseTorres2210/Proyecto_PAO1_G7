@@ -11,6 +11,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import modelo.Album;
 
 public class PantallaInicioController implements Initializable {
 
@@ -20,6 +21,8 @@ public class PantallaInicioController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        Album.crearArchivoAlbumes(App.pathAlbumes);
+        
     }    
     
     @FXML

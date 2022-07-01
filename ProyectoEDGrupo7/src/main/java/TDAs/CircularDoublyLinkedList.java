@@ -4,11 +4,14 @@
  * and open the template in the editor.
  */
 package TDAs;
+
+import java.io.Serializable;
+
 /**
  *
  * @author josel
  */
-public class CircularDoublyLinkedList<E> implements List<E> {
+public class CircularDoublyLinkedList<E> implements List<E>,Serializable {
     
     private CircularNode<E> first;
     

@@ -15,6 +15,8 @@ public class App extends Application {
 
     private static Scene scene;
     public static String pathPersonas = "archivos/personas.ser";
+    public static String pathAlbumes = "archivos/albumes.ser";
+    
 
     @Override
     public void start(Stage stage) throws IOException {

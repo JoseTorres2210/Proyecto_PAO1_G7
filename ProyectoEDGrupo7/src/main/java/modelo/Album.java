@@ -2,9 +2,19 @@
 package modelo;
 
 import TDAs.CircularDoublyLinkedList;
-import TDAs.LinkedList;
+import TDAs.*;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 
-public class Album {
+
+
+public class Album implements Serializable{
+    private static final long serialVersionUID = 8645648745972565030L;
     private String nombre;
     private String descripcion;
     private CircularDoublyLinkedList<Foto> fotos;
@@ -31,7 +41,7 @@ public class Album {
         this.fotos = new CircularDoublyLinkedList<>();  //Solo se inicializa la lista de fotos
     }
     
-
+    
     public String getNombre() {
         return nombre;
     }
@@ -63,8 +73,8 @@ public class Album {
     public void setFotoPortada(String fotoPortada) {
         this.fotoPortada = fotoPortada;
     }
-    
-    
+
+
     
     //Metodo para agregar una foto al album
     public boolean agregarFoto(Foto foto){
@@ -77,7 +87,7 @@ public class Album {
 
     @Override
     public String toString() {
-        return "Album{" + "nombre=" + nombre + ", descripcion=" + descripcion + '}';
+        return nombre + ": " + descripcion;
     }
     
     
@@ -93,11 +103,50 @@ public class Album {
     
     /*
     Metodo para GENERAR UN ARCHIVO CON VARIOS ALBUMES
+    NOTA: ESTOS ALBUMES SE ENCUENTRAN VACIOS
     */
     
     public static void crearArchivoAlbumes(String path){
-        LinkedList<Album> listaAlbumes = new LinkedList<>();
         
+        LinkedList<Album> listaAlbumes = new LinkedList<>();
+        //Se crean albumes vacios
+        Album a1 = new Album("Album perritos 1", "Fotos de perritos");
+        Album a2 = new Album("Album perritos 2", "Fotos de perritos");
+        Album a3 = new Album("Album mascotas", "Fotos de mis mascotas");
+        Album a4 = new Album("Fotos random", "Fotos locas");
+        Album a5 = new Album("Viajes", "Viaje familiar");
+        listaAlbumes.addLast(a1);
+        listaAlbumes.addLast(a2);
+        listaAlbumes.addLast(a3);
+        listaAlbumes.addLast(a4);
+        listaAlbumes.addLast(a5);
+
+        //Se escriben los albumes
+        try(ObjectOutputStream escritor = new ObjectOutputStream(new FileOutputStream(path))){            
+            escritor.writeObject(listaAlbumes);
+            
+        }catch(FileNotFoundException e){
+            System.out.println("No se pudo encontrar el archivo");
+        }catch(IOException e){
+            System.out.println("No se pudo escribir");
+        }catch(Exception e){
+            System.out.println("Ha ocurrido un error inesperado");
+        }
+
+    }
+    
+    public static LinkedList<Album> leerArchivoAlbumes(String path){
+        LinkedList<Album> listaAlbums = new LinkedList<>();
+        try(ObjectInputStream lector = new ObjectInputStream(new FileInputStream(path))){
+            listaAlbums = (LinkedList<Album>) lector.readObject();
+        }catch(FileNotFoundException e){
+            System.out.println("Archivo no encontrado: "+e);
+        }catch(IOException e){
+            System.out.println("Error al cargar la lista de concursos: "+e);
+        }catch(Exception e){
+            System.out.println("Error inesperado: "+e);
+        }
+        return listaAlbums;
     }
     
     

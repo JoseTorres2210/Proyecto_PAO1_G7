@@ -9,7 +9,9 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
 
 public class Persona implements Serializable{
@@ -121,13 +123,13 @@ public class Persona implements Serializable{
         /*
         Metodo para generar los archivos que contengan a las personas que se vayan agregando
         */
-        LinkedList<Persona> listaPersonas = new LinkedList<>();
+        Set<Persona> listaPersonas = new HashSet<>();
         Persona p1 = new Persona("Roberto", "Patino");
         Persona p2 = new Persona("Jose", "Torres");
         Persona p3 = new Persona("Allan", "Villavicencio");
-        listaPersonas.addLast(p1);
-        listaPersonas.addLast(p2);
-        listaPersonas.addLast(p3);
+        listaPersonas.add(p1);
+        listaPersonas.add(p2);
+        listaPersonas.add(p3);
         
         
         
@@ -146,10 +148,10 @@ public class Persona implements Serializable{
         
     }
     
-    public static LinkedList<Persona> leerArchivoPersonas(String path){
-        LinkedList<Persona> listaPersonas = new LinkedList<>();
+    public static Set<Persona> leerArchivoPersonas(String path){
+        Set<Persona> listaPersonas = new HashSet<>();
         try(ObjectInputStream lector = new ObjectInputStream(new FileInputStream(path))){
-            listaPersonas = (LinkedList<Persona>) lector.readObject();
+            listaPersonas = (Set<Persona>) lector.readObject();
         }catch(FileNotFoundException e){
             System.out.println("Archivo no encontrado: "+e);
         }catch(IOException e){
@@ -162,8 +164,8 @@ public class Persona implements Serializable{
     
     
     public static void agregarNuevaPersonaArchivos(Persona persona,String path){
-        LinkedList<Persona> listaPersonas = leerArchivoPersonas(path);
-        listaPersonas.addLast(persona);
+        Set<Persona> listaPersonas = leerArchivoPersonas(path);
+        listaPersonas.add(persona);
         try(ObjectOutputStream escritor = new ObjectOutputStream(new FileOutputStream(path))){
             //Se escribe la lista con los auspiciantes actualizada
             escritor.writeObject(listaPersonas);

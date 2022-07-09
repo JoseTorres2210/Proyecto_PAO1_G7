@@ -82,7 +82,8 @@ public class VisualizarFotosEnAlbumController implements Initializable {
     @FXML
     private void mostrarFotoSiguiente(ActionEvent event) {
         System.out.println("Se muestra la foto siguiente");
-        numFoto++;
+        
+        fotoActual = fotos.get(numFoto++);
         llenarImageView();
     }
     

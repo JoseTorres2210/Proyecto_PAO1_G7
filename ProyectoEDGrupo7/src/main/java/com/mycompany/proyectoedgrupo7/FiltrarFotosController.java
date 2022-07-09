@@ -43,7 +43,17 @@ public class FiltrarFotosController implements Initializable{
     }
 
     
-
+    private void buscar(ActionEvent event){
+        if(filtrarPersona.isSelected()){
+            
+        }
+        if(filtrarFecha.isSelected()){
+            
+        }
+        if(filtrarLugar.isSelected()){
+            
+        }
+    }
 
     
 }

@@ -9,6 +9,7 @@ import TDAs.LinkedList;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Set;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -30,8 +31,8 @@ public class SeleccionarPersonasController implements Initializable {
     private ListView<Persona> lvPersonasEnFoto;
     @FXML
     private ListView<Persona> lvPersonasEnSistema;
-    private LinkedList<Persona> listaPersonas = Persona.leerArchivoPersonas(App.pathPersonas);
-    private LinkedList<Persona> listaPersonasCopia = Persona.leerArchivoPersonas(App.pathPersonas);
+    private Set<Persona> listaPersonas = Persona.leerArchivoPersonas(App.pathPersonas);
+    private Set<Persona> listaPersonasCopia = Persona.leerArchivoPersonas(App.pathPersonas);
     ObservableList<Persona> l = FXCollections.observableArrayList();
     public static Foto fotoOG;
     /**

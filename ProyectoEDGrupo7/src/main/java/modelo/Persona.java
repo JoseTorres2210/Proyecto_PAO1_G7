@@ -23,6 +23,11 @@ public class Persona implements Serializable{
     private int id;
     */
     private String id;
+    private String nombreCompleto;
+
+    public String getNombreCompleto() {
+        return nombreCompleto;
+    }
     
     //Constructor
     public Persona(String nombre, String apellido){
@@ -30,6 +35,7 @@ public class Persona implements Serializable{
         this.apellido = apellido;
         this.listaFotosAparicion = new ArrayList<>();
         this.asignarid();
+        this.nombreCompleto = nombre+" "+apellido;
     }
     
     //Constructor que recibe la lista de fotos donde aparece esa persona
@@ -38,6 +44,7 @@ public class Persona implements Serializable{
         this.apellido = apellido;
         this.listaFotosAparicion = listaFotosAparicion;
         this.asignarid();
+        this.nombreCompleto = nombre+" "+apellido;
     }
     
     
@@ -181,6 +188,10 @@ public class Persona implements Serializable{
             System.out.println("Error general: "+e);
         }
     }
+        
+        
+        
+    
     
     
         

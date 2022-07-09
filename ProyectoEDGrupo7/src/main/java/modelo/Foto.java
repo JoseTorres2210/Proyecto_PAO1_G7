@@ -12,6 +12,15 @@ public class Foto implements Serializable{
     private String nomAlbum;
     private String imagen;
     //private Persona persona;
+    private Album album;
+
+    public Album getAlbum() {
+        return album;
+    }
+
+    public void setAlbum(Album album) {
+        this.album = album;
+    }
 
     public Foto(ArrayList<Persona> personas, LocalDate fecha, String lugar,String descripcion){
         this.personas= personas;
@@ -24,7 +33,7 @@ public class Foto implements Serializable{
         this.fecha=fecha;
         this.lugar=lugar;
         this.descripcion=descripcion;
-        this.personas = null;   //Xq no hay personas en la foto
+        this.personas = new ArrayList<>();   //Xq no hay personas en la foto
     }
 
     public LocalDate getFecha() {
@@ -79,8 +88,13 @@ public class Foto implements Serializable{
     public boolean agregarPersonaEnFoto(Persona persona){
         boolean retorno = false;
         //Debemos agregar una persona a una foto SOLO SI ESTA NO SE ENCUENTRA EN LA LISTA PREVIAMENTE
+        if(personas.isEmpty()){
+            personas.addLast(persona);
+            return true;
+        }
         for(Persona p : personas){
             if(!p.equals(persona)){
+                System.out.println("NO HAY COINCIDENCIA");
                 //La agregamos a la lista
                 personas.addLast(persona);
                 retorno =  true;
@@ -90,6 +104,25 @@ public class Foto implements Serializable{
         }
         return retorno;
     }
+    
+    
+    public boolean eliminarPersonaDeFoto(Persona persona){
+        boolean retorno = false;
+        //Debemos eliminar a esa persona a una foto SOLO SI ESTA NO SE ENCUENTRA EN LA LISTA PREVIAMENTE
+        for(Persona p : personas){
+            if(p.equals(persona)){
+                //La eliminamos
+                int indice = personas.indexOf(p);
+                personas.remove(indice);
+                retorno =  true;
+            }else{
+                System.out.println("LA PERSONA NO ESTABA EN LA LISTA");
+            }
+        }
+        return retorno;
+    }
+    
+    
 
     @Override
     public String toString() {

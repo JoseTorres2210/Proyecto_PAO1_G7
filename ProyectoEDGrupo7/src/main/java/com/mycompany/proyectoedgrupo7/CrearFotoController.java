@@ -25,6 +25,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 
 import javafx.scene.control.Button;
@@ -33,12 +34,16 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
@@ -61,13 +66,10 @@ public class CrearFotoController implements Initializable {
     private TextField txtLugarFoto;
     @FXML
     private DatePicker fechaFoto;
-    @FXML
     private RadioButton rbAparecenPersonas;
-    @FXML
     private RadioButton rbNoAparecenPersonas;
     @FXML
     private ImageView imgviewFotoSeleccionada;
-    @FXML
     private Button buttonSeleccionarPersonas;
     @FXML
     private ComboBox<Album> cbAlbumes;
@@ -75,18 +77,18 @@ public class CrearFotoController implements Initializable {
     @FXML
     private BorderPane bpFoto;
     @FXML
-    private ToggleGroup personas;
-    
+    private GridPane gridPaneOpciones;
+  
+
     /**
      * Initializes the controller class.
      */
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-        buttonSeleccionarPersonas.setVisible(false);
-        //Se llena el comboBox
+
         llenarCb();
+
     }    
     
     @FXML
@@ -111,44 +113,21 @@ public class CrearFotoController implements Initializable {
             if(direccionImagen==null){
                 throw new EmptyFieldsException();
             }
-            if(rbNoAparecenPersonas.isSelected()){
-                //Se crea el objeto sin un ArrayList de personas
-                if(lugar==null||descripcion==null){
-                    throw new EmptyFieldsException();
-                }
-                
-                foto = new Foto(fecha, lugar, descripcion);
-                
-            }else if(rbAparecenPersonas.isSelected()){
-                //Se crea el objeto con el ArrayList de personas seleccionadas
-                //foto = new Foto(LISTApersonas, fecha, lugar, descripcion) FIXMEEEEEE
-            }
             
+            //Se crea el objeto sin un ArrayList de personas inicialmente
+            if(lugar==null||descripcion==null){
+                throw new EmptyFieldsException();
+            }
+
+            foto = new Foto(fecha, lugar, descripcion);
+            foto.setAlbum(cbAlbumes.getSelectionModel().getSelectedItem());     
             System.out.println(direccionImagen);
             //Se settea la direccion de la foto
             System.out.println(foto);
             foto.setImagen(direccionImagen);
             
-            
-            
-            //Se actualiza el archivo de albumes para que ahora contenga la nueva foto
-            System.out.println("AGREGANDO EL ALBUM ACTUALIZADO A LA LISTA DE ALBUMES CONTENIDOS EN EL ARCHIVO");
-            LinkedList<Album> l = Album.leerArchivoAlbumes(App.pathAlbumes);
-            for(Album a:l){
-                if(a.compareTo(album)==0){
-                    //Son el mismo album, Se agrega la foto
-                    a.agregarFoto(foto);
-                }
-            }
-            //Se escribe la lista actualizada en el archivo
-            Album.actualizarListaAlbumes(l, App.pathAlbumes);
-            
-            
-            Alert exito = new Alert(Alert.AlertType.INFORMATION, "La foto ha sido creada de manera exitosa");
-            exito.setTitle("Exito");
-            exito.setHeaderText("Operacion exitosa");
-            exito.show();
-            App.setRoot("menuPrincipal");
+            CrearFoto2Controller.fotoOG = foto;
+            App.setRoot("crearFoto2");
   
 
             
@@ -237,49 +216,9 @@ public class CrearFotoController implements Initializable {
        }
     }
 
-    @FXML
-    private void switchToSeleccionarPersonas(ActionEvent event) throws IOException {
-        App.setRoot("seleccionarPersonas");
-        /*
-        AQUI LA IDEA ES PASAR A UN LV DE PERSONAS DONDE EL USUARIO
-        PUEDA SELECCIONAR A TODAS LAS PERSONAS QUE SE DESEA AGREGAR A LA FOTO
-        */
-//        try{
-//            //Lista total de personas registradas en el sistema
-//            LinkedList<Persona> listaPersonas = Persona.leerArchivoPersonas(App.pathPersonas);
-//            
-//            buttonCrearFoto.setText("Seleccionar persona");
-//            buttonCrearFoto.setVisible(false);
-//            HBox hbox = new HBox(20);
-//            HBox hbox2 = new HBox(100);
-//            VBox vbox = new VBox(20);
-//            Label lblpersonasEnFoto = new Label("Personas en la foto:");
-//            Label lblpersonasRegistradas = new Label("Personas registradas:");
-//            hbox2.getChildren().addAll(lblpersonasEnFoto,lblpersonasRegistradas);
-//            
-//            bpFoto.setCenter(null);
-//            ObservableList<Persona> l = FXCollections.observableArrayList();
-//            for(Persona p: listaPersonas){
-//                System.out.println(p);
-//                //Se los agg al ObservableList
-//                l.add(p);
-//            }
-//            ListView<Persona> lvPersonas = new ListView<>();
-//            lvPersonas.getItems().setAll(l);
-//            ListView<Persona> lvPersonasEnLaFoto = new ListView<>();    //Comienza vacio
-//            LinkedList<Persona> listaPersonasCopia = Persona.leerArchivoPersonas(App.pathPersonas);
-//            
-//            for(Persona p:listaPersonas){
-//                if(pe.contains(p)){
-//                    //Se recupera el indice
-//                    int index = 
-//                }
-//            }
-//            
-//        }
 
         
-    }
+    
     
     private void llenarCb(){
         for(Album a:Album.leerArchivoAlbumes(App.pathAlbumes)){
@@ -287,18 +226,7 @@ public class CrearFotoController implements Initializable {
         }  
     }
 
-    @FXML
-    private void unlockButton() {
-        /*
-        Metodo para bloquear el boton de agregar personas hasta que se seleccione el 
-        radio button con el texto "Si"
-        */
-        if(rbAparecenPersonas.isSelected()){
-            buttonSeleccionarPersonas.setVisible(true);
-        }else {
-            buttonSeleccionarPersonas.setVisible(false);
-        }
-    }
+
     
     
   

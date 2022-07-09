@@ -12,6 +12,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import modelo.Album;
+import modelo.Persona;
 
 public class PantallaInicioController implements Initializable {
 
@@ -22,6 +23,7 @@ public class PantallaInicioController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         Album.crearArchivoAlbumes(App.pathAlbumes);
+        Persona.crearArchivoPersonas(App.pathPersonas);
         
     }    
     

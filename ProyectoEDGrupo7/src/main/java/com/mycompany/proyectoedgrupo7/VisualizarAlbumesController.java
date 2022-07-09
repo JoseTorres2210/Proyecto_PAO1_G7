@@ -105,7 +105,13 @@ public class VisualizarAlbumesController implements Initializable {
                   
                             //boton para ver fotos
                             Button btnEd = new Button("Ver album");
-                            btnEd.setOnAction(e ->visualizarFotosAlbum(album));
+                            btnEd.setOnAction(e ->{
+                                try {
+                                    visualizarFotosAlbum(album);
+                                } catch (IOException ex) {
+                                    ex.printStackTrace();
+                                }
+                            });
                                
                             //boton eliminar
                             Button btnEl = new Button("Eliminar");
@@ -171,8 +177,10 @@ public class VisualizarAlbumesController implements Initializable {
         
     }
     
-    private void visualizarFotosAlbum(Album a){
+    private void visualizarFotosAlbum(Album a) throws IOException{
+        VisualizarFotosEnAlbumController.albumOG = a;
         System.out.println("SE MUESTRAN LAS FOTOS DEL ALBUM");
+        App.setRoot("visualizarFotosEnAlbum");
         
     }
 

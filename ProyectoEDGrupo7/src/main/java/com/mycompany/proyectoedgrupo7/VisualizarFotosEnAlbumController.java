@@ -38,7 +38,7 @@ public class VisualizarFotosEnAlbumController implements Initializable {
     
     public static Album albumOG;
     int numFoto = 0;
-    
+    private CircularDoublyLinkedList<Foto> fotos = fotos = albumOG.getFotos();;
     /**
      * Initializes the controller class.
      */
@@ -81,8 +81,13 @@ public class VisualizarFotosEnAlbumController implements Initializable {
     
     //Metodo para llenar el imagview
     
+    /*
+    ##################
+    Enviarle un iterador al metodo imageView???
+    ##################
+    */
     private void llenarImageView(){
-        CircularDoublyLinkedList<Foto> fotos = albumOG.getFotos();
+        
         System.out.println(fotos.get(0).getNomAlbum());
         System.out.println(fotos.get(0).getImagen());
         

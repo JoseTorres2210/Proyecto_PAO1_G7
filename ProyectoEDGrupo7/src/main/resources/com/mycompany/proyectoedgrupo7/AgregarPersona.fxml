@@ -53,12 +53,12 @@
       </GridPane>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
          <children>
-            <Button fx:id="btnGuardar" mnemonicParsing="false" onAction="#guardarAuspiciante" text="Guardar">
+            <Button fx:id="btnGuardar" mnemonicParsing="false" text="Guardar">
                <HBox.margin>
                   <Insets right="40.0" />
                </HBox.margin>
             </Button>
-            <Button fx:id="btnRegresar" mnemonicParsing="false" onAction="#switchToListaAus" text="Regresar" />
+            <Button fx:id="btnRegresar" mnemonicParsing="false" onAction="#cancelar" text="Regresar" />
          </children>
       </HBox>
    </children>

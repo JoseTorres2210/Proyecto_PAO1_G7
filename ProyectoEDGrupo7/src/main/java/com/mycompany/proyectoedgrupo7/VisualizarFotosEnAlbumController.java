@@ -6,16 +6,20 @@
 package com.mycompany.proyectoedgrupo7;
 
 import TDAs.CircularDoublyLinkedList;
+import TDAs.LinkedList;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -37,6 +41,7 @@ public class VisualizarFotosEnAlbumController implements Initializable {
     private ImageView imgvFotos;
     
     public static Album albumOG;
+    private Foto fotoActual;
     int numFoto = 0;
     private CircularDoublyLinkedList<Foto> fotos = fotos = albumOG.getFotos();;
     /**
@@ -48,12 +53,14 @@ public class VisualizarFotosEnAlbumController implements Initializable {
         if(albumOG!=null)
             lblNombreAlbumFotos.setText(albumOG.getNombre());
         llenarImageView();
+        fotoActual = albumOG.getFotos().get(numFoto);
         
     }    
     
     @FXML
     private void mostrarFotoAnterior(ActionEvent event) {
         System.out.println("Se muestra la foto anterior en la lista circular de fotos");
+        
     }
 
     @FXML
@@ -64,7 +71,7 @@ public class VisualizarFotosEnAlbumController implements Initializable {
 
     @FXML
     private void eliminarFotoActual(ActionEvent event) {
-        System.out.println("Se pide confirmacion para eliminar la foto actual");
+        eliminarFoto(fotoActual);
     }
 
     @FXML
@@ -75,6 +82,8 @@ public class VisualizarFotosEnAlbumController implements Initializable {
     @FXML
     private void mostrarFotoSiguiente(ActionEvent event) {
         System.out.println("Se muestra la foto siguiente");
+        numFoto++;
+        llenarImageView();
     }
     
     
@@ -88,11 +97,11 @@ public class VisualizarFotosEnAlbumController implements Initializable {
     */
     private void llenarImageView(){
         
-        System.out.println(fotos.get(0).getNomAlbum());
-        System.out.println(fotos.get(0).getImagen());
+        System.out.println(fotos.get(numFoto).getNomAlbum());
+        System.out.println(fotos.get(numFoto).getImagen());
         
         try{            
-            String filename = "archivos/fotos/"+fotos.get(0).getImagen(); 
+            String filename = "archivos/fotos/"+fotos.get(numFoto).getImagen(); 
             Image image = new Image(new FileInputStream(filename));
             imgvFotos.setImage(image);
         }catch (FileNotFoundException ex) { 
@@ -103,6 +112,40 @@ public class VisualizarFotosEnAlbumController implements Initializable {
         
         
         
+    }
+    
+    private void eliminarFoto(Foto foto){
+        System.out.println("Se pide confirmacion para eliminar la foto actual");
+        try{
+        Alert alerta = new Alert(Alert.AlertType.WARNING,"Recuerde que esta acción es irreversible. \n¿Seguro que desea continuar?");
+        
+        alerta.setHeaderText("Eliminacion de Foto");
+        alerta.showAndWait();
+        
+        Alert confirmacion = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmacion.setHeaderText("Eliminacion");
+        confirmacion.setContentText("Se procederá a eliminar esta foto de su album.\n ¿Continuar?");
+
+        
+        
+
+        Optional<ButtonType> result = confirmacion.showAndWait();
+        if(result.get()==ButtonType.OK){
+            //Se elimina el objeto de la lista
+            albumOG.eliminarFoto(foto);
+
+            //Se actualiza el archivo
+            Album.actualizarAlbum(albumOG, App.pathAlbumes);
+
+        }else{
+            System.out.println("No problem");
+        }
+        }catch(Exception e){
+            System.out.println("Error al eliminar el album: "+e.getLocalizedMessage());
+            e.printStackTrace();
+            e.getCause();
+           
+        }
     }
 
 }

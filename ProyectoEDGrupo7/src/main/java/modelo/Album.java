@@ -176,6 +176,26 @@ public class Album implements Serializable,Comparable<Album>{
         }
     }
     
+    
+    public static void actualizarAlbum(Album album,String path){
+        LinkedList<Album> listaAlbums = leerArchivoAlbumes(path);
+        int indice = listaAlbums.indexOf(album); //Se recupera el indice de ese album
+        listaAlbums.remove(indice);
+        listaAlbums.add(indice, album);
+        try(ObjectOutputStream escritor = new ObjectOutputStream(new FileOutputStream(path))){
+           //Escribimos la nueva lista actualizada en el archivo serializado
+           escritor.writeObject(listaAlbums);
+        }catch(IOException e){
+            System.out.println("Error al escribir: "+e);
+        }catch(IndexOutOfBoundsException e){
+            System.out.println("Error con los limites al actualizar el archivo");
+        }catch(Exception e){
+            System.out.println("Error general: "+e);
+        }     
+        
+    }
+    
+    
     public static void actualizarListaAlbumes(LinkedList<Album> listaAlbumes, String path){
         try(ObjectOutputStream escritor = new ObjectOutputStream(new FileOutputStream(path))){
            //Escribimos la nueva lista actualizada en el archivo serializado
@@ -196,6 +216,21 @@ public class Album implements Serializable,Comparable<Album>{
             return this.descripcion.compareTo(o.descripcion);
         }
         return retorno;
+    }
+    
+    
+    
+    //Metodo para eliminar una foto de un album
+    public void eliminarFoto(Foto foto){
+        //Recorremos la lista de fotos asociada a ese album
+        for(int i = 0;i<fotos.size();i++){
+            if(fotos.get(i).equals(foto)){
+                //Se la elimina
+                fotos.remove(i);
+                break;
+            }
+            
+        }
     }
     
     

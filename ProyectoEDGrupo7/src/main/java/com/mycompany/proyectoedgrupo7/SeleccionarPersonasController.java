@@ -16,6 +16,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
 import javafx.scene.control.ListView;
+import modelo.Foto;
 import modelo.Persona;
 /**
  * FXML Controller class
@@ -29,13 +30,15 @@ public class SeleccionarPersonasController implements Initializable {
     private ListView<Persona> lvPersonasEnFoto;
     @FXML
     private ListView<Persona> lvPersonasEnSistema;
+    private LinkedList<Persona> listaPersonas = Persona.leerArchivoPersonas(App.pathPersonas);
+    private LinkedList<Persona> listaPersonasCopia = Persona.leerArchivoPersonas(App.pathPersonas);
+    ObservableList<Persona> l = FXCollections.observableArrayList();
+    public static Foto fotoOG;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        LinkedList<Persona> listaPersonas = Persona.leerArchivoPersonas(App.pathPersonas);
-        ObservableList<Persona> l = FXCollections.observableArrayList();
         for(Persona p: listaPersonas){
             System.out.println(p);
             //Se los agg al ObservableList
@@ -51,11 +54,17 @@ public class SeleccionarPersonasController implements Initializable {
 
     @FXML
     private void switchToRegistrarNuevaPersona(ActionEvent event) {
+        
     }
 
     @FXML
     private void agregarPersonaAFoto(ActionEvent event) {
-        System.out.println("Se agg una nueva persona a la foto");;
+        System.out.println("Se agg una nueva persona a la foto");
+        Persona p = (Persona) lvPersonasEnSistema.getSelectionModel().getSelectedItem();
+        System.out.println("Agregando a la lista de personas en foto a la persona: "+p);
+        fotoOG.agregarPersonaEnFoto(p);
+        
+        //Se recupera la persona 
     }
 
 }

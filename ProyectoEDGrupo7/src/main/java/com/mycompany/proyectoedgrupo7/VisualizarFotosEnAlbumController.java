@@ -5,6 +5,9 @@
  */
 package com.mycompany.proyectoedgrupo7;
 
+import TDAs.CircularDoublyLinkedList;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -14,8 +17,10 @@ import javafx.fxml.Initializable;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import modelo.Album;
+import modelo.Foto;
 /**
  * FXML Controller class
  *
@@ -32,6 +37,7 @@ public class VisualizarFotosEnAlbumController implements Initializable {
     private ImageView imgvFotos;
     
     public static Album albumOG;
+    int numFoto = 0;
     
     /**
      * Initializes the controller class.
@@ -41,6 +47,8 @@ public class VisualizarFotosEnAlbumController implements Initializable {
         // TODO
         if(albumOG!=null)
             lblNombreAlbumFotos.setText(albumOG.getNombre());
+        llenarImageView();
+        
     }    
     
     @FXML
@@ -67,6 +75,29 @@ public class VisualizarFotosEnAlbumController implements Initializable {
     @FXML
     private void mostrarFotoSiguiente(ActionEvent event) {
         System.out.println("Se muestra la foto siguiente");
+    }
+    
+    
+    
+    //Metodo para llenar el imagview
+    
+    private void llenarImageView(){
+        CircularDoublyLinkedList<Foto> fotos = albumOG.getFotos();
+        System.out.println(fotos.get(0).getNomAlbum());
+        System.out.println(fotos.get(0).getImagen());
+        
+        try{            
+            String filename = "archivos/fotos/"+fotos.get(0).getImagen(); 
+            Image image = new Image(new FileInputStream(filename));
+            imgvFotos.setImage(image);
+        }catch (FileNotFoundException ex) { 
+            ex.printStackTrace();
+        }catch(IllegalArgumentException e){
+            e.printStackTrace();
+        }
+        
+        
+        
     }
 
 }

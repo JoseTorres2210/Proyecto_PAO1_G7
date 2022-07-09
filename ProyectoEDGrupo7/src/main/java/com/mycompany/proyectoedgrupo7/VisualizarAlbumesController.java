@@ -10,7 +10,6 @@ import TDAs.LinkedList;
 import com.mycompany.proyectoedgrupo7.App;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -80,13 +79,6 @@ public class VisualizarAlbumesController implements Initializable {
     
     
     private void agregarOpciones(){
-        /*
-        #################
-        TODOOOOOOOOOO:
-        AGREGAR LOS BOTONES QUE REPRESENTAN LAS OPCIONES
-        #################
-        */
-
         Callback<TableColumn<Album, Void>, TableCell<Album, Void>> cellFactory = new Callback<TableColumn<Album, Void>, TableCell<Album, Void>>() {
             @Override
             public TableCell<Album, Void> call(final TableColumn<Album, Void> param) {
@@ -105,6 +97,10 @@ public class VisualizarAlbumesController implements Initializable {
                   
                             //boton para ver fotos
                             Button btnEd = new Button("Ver album");
+                            if(album.getFotos().isEmpty()){
+                                //Evitamos que el usuario pueda ver las fotos del album
+                                btnEd.setDisable(true);
+                            }
                             btnEd.setOnAction(e ->{
                                 try {
                                     visualizarFotosAlbum(album);

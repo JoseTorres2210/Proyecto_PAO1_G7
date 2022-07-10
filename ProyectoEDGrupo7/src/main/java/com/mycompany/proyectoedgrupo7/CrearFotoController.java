@@ -128,18 +128,15 @@ public class CrearFotoController implements Initializable {
             
             CrearFoto2Controller.fotoOG = foto;
             App.setRoot("crearFoto2");
-  
+            foto.setNomAlbum(album.getNombre());
 
             
             
             
         }catch(EmptyFieldsException e){
-            System.out.println(e.getStackTrace());
-            e.printStackTrace();
             Alert alerta = new Alert(Alert.AlertType.ERROR,"Asegúrese de llenar todos los campos"); //FIXME
             alerta.setTitle("Error");
             alerta.setHeaderText("Ha ocurrido un error:");
-            System.out.println(e.getClass());
             alerta.show();  
         }
         catch(NullPointerException e){

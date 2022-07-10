@@ -109,12 +109,13 @@ public class CrearFoto2Controller implements Initializable {
     }
 
     @FXML
-    private void switchToAgregarPersona(ActionEvent event) {
+    private void switchToAgregarPersona(ActionEvent event) throws IOException {
         /*
         #########################
         DARLE IMPLEMENTACION A ESTE METODO
         #########################
         */
+        App.setRoot("crearPersona");
     }
 
     @FXML

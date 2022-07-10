@@ -126,7 +126,7 @@
    <bottom>
       <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="buttonFiltrar" mnemonicParsing="false" text="Filtrar">
+            <Button fx:id="buttonFiltrar" mnemonicParsing="false" onAction="#switchToMostrarResultadoFiltro" text="Filtrar">
                <font>
                   <Font size="14.0" />
                </font>

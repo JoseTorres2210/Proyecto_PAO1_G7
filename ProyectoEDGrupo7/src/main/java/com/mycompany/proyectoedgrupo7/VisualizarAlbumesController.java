@@ -28,6 +28,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.util.Callback;
 import modelo.Album;
+import modelo.Foto;
 
 public class VisualizarAlbumesController implements Initializable {
 
@@ -40,6 +41,7 @@ public class VisualizarAlbumesController implements Initializable {
     private TableColumn<Album, Void> tcOpciones;
     @FXML
     private TableColumn<Album, String> tcDescripcion;
+    public static Foto foto;
     /**
      * Initializes the controller class.
      */

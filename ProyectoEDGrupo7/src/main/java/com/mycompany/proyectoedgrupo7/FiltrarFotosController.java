@@ -156,4 +156,8 @@ public class FiltrarFotosController implements Initializable{
         }
         return result;
     }
+
+    @FXML
+    private void switchToMostrarResultadoFiltro(ActionEvent event) {
+    }
 }

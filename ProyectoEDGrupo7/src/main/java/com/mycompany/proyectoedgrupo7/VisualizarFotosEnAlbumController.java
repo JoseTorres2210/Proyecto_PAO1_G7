@@ -1,17 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.mycompany.proyectoedgrupo7;
 
 import TDAs.CircularDoublyLinkedList;
 import TDAs.CircularNode;
 import TDAs.LinkedList;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -142,6 +141,7 @@ public class VisualizarFotosEnAlbumController implements Initializable {
     }
     
     private void eliminarFoto(Foto foto){
+        VisualizarAlbumesController.foto = foto;
         System.out.println("Se pide confirmacion para eliminar la foto actual");
         try{
         Alert alerta = new Alert(Alert.AlertType.WARNING,"Recuerde que esta acción es irreversible. \n¿Seguro que desea continuar?");
@@ -159,11 +159,15 @@ public class VisualizarFotosEnAlbumController implements Initializable {
         Optional<ButtonType> result = confirmacion.showAndWait();
         if(result.get()==ButtonType.OK){
             //Se elimina el objeto de la lista
+            
             albumOG.eliminarFoto(foto);
             
             //Se actualiza el archivo
             Album.actualizarAlbum(albumOG, App.pathAlbumes);
             System.out.println(fotos);
+            //Se elimina la foto de la carpeta
+            //eliminarFotoDeCarpeta(foto);
+            
             if(fotos.isEmpty()){
                 //Se avisa que el album esta vacio y se lo manda a la ventana de atras
                 Alert alerta2 = new Alert(Alert.AlertType.INFORMATION,"El album quedó vacío. \nRegresando al menu de visualizacion.");
@@ -171,13 +175,15 @@ public class VisualizarFotosEnAlbumController implements Initializable {
                 alerta2.setHeaderText("Album vacío");
                 App.setRoot("visualizarAlbumes");
                 alerta2.show();
+
             }else{
                 
                 nodo = nodo.getPrevious();
                 fotoActual = nodo.getContent();
                 llenarImageView(fotoActual);
+
             }
-            
+            eliminarFotoDeCarpeta(foto);
 
         }else{
             System.out.println("No problem");
@@ -189,5 +195,34 @@ public class VisualizarFotosEnAlbumController implements Initializable {
            
         }
     }
+    
+    
+    
+    
+    public  void eliminarFotoDeCarpeta(Foto foto) throws IOException{
+        /*
+        ###############################
+        Metodo para remover la foto de la carpeta de fotos
+        ###############################
+        */
+        File tmp = new File("archivos/fotos/"+foto.getImagen());
+
+        System.out.println(tmp.toPath());
+        //tmp.deleteOnExit();
+        //Files.deleteIfExists(tmp.toPath());
+        try {
+
+            
+            System.out.println(tmp.delete());
+            //Files.move(tmp.toPath(), tmp2.toPath());
+            
+        
+            
+        } catch (Exception ex) {
+            System.out.println("NO SE PUDO BORRAR LA FOTO");
+            ex.printStackTrace();
+        }
+        Files.delete(tmp.toPath());
+}
 
 }

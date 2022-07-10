@@ -201,7 +201,7 @@ public class CrearFotoController implements Initializable {
         }
         
         direccionImagen = imgFile.getName();
-    
+        
        }catch(FileAlreadyExistsException e){
             System.out.println("LA FOTO YA EXISTE EN LA CARPETA");
             System.out.println(e.getStackTrace());

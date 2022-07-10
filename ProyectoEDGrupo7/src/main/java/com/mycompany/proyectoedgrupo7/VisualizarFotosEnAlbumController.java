@@ -60,6 +60,11 @@ public class VisualizarFotosEnAlbumController implements Initializable {
         CircularNode<Foto> nodo = albumOG.getFotos().getCurrentNode();
         //fotoActual = nodo.getContent();
         System.out.println("----->"+fotoActual);
+        if(fotoActual.getPersonas().isEmpty()){
+            buttonEditarPersonasFoto.setDisable(true);
+        }else{
+            buttonEditarPersonasFoto.setDisable(false);
+        }
     }    
     
     @FXML
@@ -68,7 +73,11 @@ public class VisualizarFotosEnAlbumController implements Initializable {
         fotoActual = nodo.getContent();
         llenarImageView(fotoActual);
         System.out.println(fotoActual);
-        
+        if(fotoActual.getPersonas().isEmpty()){
+            buttonEditarPersonasFoto.setDisable(true);
+        }else{
+            buttonEditarPersonasFoto.setDisable(false);
+        }
     }
 
     @FXML
@@ -97,6 +106,11 @@ public class VisualizarFotosEnAlbumController implements Initializable {
         System.out.println(fotoActual);
         System.out.println("******" +fotos);
         llenarImageView(fotoActual);
+        if(fotoActual.getPersonas().isEmpty()){
+            buttonEditarPersonasFoto.setDisable(true);
+        }else{
+            buttonEditarPersonasFoto.setDisable(false);
+        }
     }
     
     

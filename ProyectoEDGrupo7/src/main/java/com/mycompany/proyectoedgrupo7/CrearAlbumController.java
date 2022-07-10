@@ -112,24 +112,24 @@ public class CrearAlbumController implements Initializable {
     
     
         //Metodo para cargar la imagen por defecto 
-//    private void cargarFotoPorDefecto(){
-//        InputStream  input = null;
-//        try {           
-//            input =  App.class.getResource("archivos/imagenesPortadaAlbum/defaultPic.png").openStream();
-//            Image image = new Image(input, 100, 100, false, false);
-//            imgviewPortada.setImage(image);
-//        } catch (IOException ex) {
-//            System.out.println("No se pudo cargar foto por defecto");
-//        } finally {
-//            if (input!=null){
-//            try {
-//                input.close();
-//            } catch (IOException ex) {
-//                System.out.println("Error al cerrar el recurso");
-//            }
-//            }
-//        }
-//    }
+    private void cargarFotoPorDefecto(){
+        InputStream  input = null;
+        try {           
+            input =  App.class.getResource("archivos/imagenesPortadaAlbum/defaultPic.png").openStream();
+            Image image = new Image(input, 100, 100, false, false);
+            imgviewPortada.setImage(image);
+        } catch (IOException ex) {
+            System.out.println("No se pudo cargar foto por defecto");
+        } finally {
+            if (input!=null){
+            try {
+                input.close();
+            } catch (IOException ex) {
+                System.out.println("Error al cerrar el recurso");
+            }
+            }
+        }
+    }
     
     
     
@@ -151,9 +151,9 @@ public class CrearAlbumController implements Initializable {
                 throw new NullPointerException();
             }
             
-            //if(!(direccionImagen==null)){
+            if(!(direccionImagen==null)){
                 Album album = new Album(nombreAlbum, descripcionAlbum);
-                //album.setFotoPortada(direccionImagen);
+                album.setFotoPortada(direccionImagen);
                 Alert exito = new Alert(Alert.AlertType.INFORMATION, "Su álbum ha sido creada de manera exitosa");
                 
                 //Se agrega el album al archivo
@@ -166,24 +166,25 @@ public class CrearAlbumController implements Initializable {
                 exito.setHeaderText("Operacion exitosa");
                 exito.show();
                 App.setRoot("menuPrincipal");  
-            //}else{
-//                System.out.println("Se pide confirmacion indicando que se colocara la foto por defecto");
-//                Alert confirmacionFotoDefault = new Alert(Alert.AlertType.CONFIRMATION);
-//                confirmacionFotoDefault.setTitle("Confirmación");
-//                confirmacionFotoDefault.setHeaderText("Se procederá a agregar una foto por defecto para la portada de su álbum");
-//                confirmacionFotoDefault.setContentText("Está usted de acuerdo?");
+            }else{
+                System.out.println("Se pide confirmacion indicando que se colocara la foto por defecto");
+                Alert confirmacionFotoDefault = new Alert(Alert.AlertType.CONFIRMATION);
+                confirmacionFotoDefault.setTitle("Confirmación");
+                confirmacionFotoDefault.setHeaderText("Se procederá a agregar una foto por defecto para la portada de su álbum");
+                confirmacionFotoDefault.setContentText("Está usted de acuerdo?");
                 
-//                Optional<ButtonType> result = confirmacionFotoDefault.showAndWait();
-//                if(result.get()==ButtonType.OK){
-//                    //Se crea el objeto con la imagen default
-//                    Album album = new Album(nombreAlbum, descripcionAlbum);
-//                    album.setFotoPortada("defaultPic.png");          
-//                    //Aqui se debe escribir al album en el archivo serializado
-//                    Album.agregarNuevoAlbumArchivo(album, App.pathAlbumes);
-//                    App.setRoot("menuPrincipal");
-//                    System.out.println(Album.leerArchivoAlbumes(App.pathAlbumes));
-                //}
-            //}
+                Optional<ButtonType> result = confirmacionFotoDefault.showAndWait();
+                if(result.get()==ButtonType.OK){
+                    //Se crea el objeto con la imagen default
+                    Album album = new Album(nombreAlbum, descripcionAlbum);
+                    
+                    album.setFotoPortada("defaultPic.png");          
+                    //Aqui se debe escribir al album en el archivo serializado
+                    Album.agregarNuevoAlbumArchivo(album, App.pathAlbumes);
+                    App.setRoot("menuPrincipal");
+                    System.out.println(Album.leerArchivoAlbumes(App.pathAlbumes));
+                }
+            }
             
             }catch(NullPointerException e){
                 System.out.println("No se llenaron todos los campos: ");

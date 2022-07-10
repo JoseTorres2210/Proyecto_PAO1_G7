@@ -146,9 +146,24 @@ public class VisualizarFotosEnAlbumController implements Initializable {
         if(result.get()==ButtonType.OK){
             //Se elimina el objeto de la lista
             albumOG.eliminarFoto(foto);
-
+            
             //Se actualiza el archivo
             Album.actualizarAlbum(albumOG, App.pathAlbumes);
+            System.out.println(fotos);
+            if(fotos.isEmpty()){
+                //Se avisa que el album esta vacio y se lo manda a la ventana de atras
+                Alert alerta2 = new Alert(Alert.AlertType.INFORMATION,"El album quedó vacío. \nRegresando al menu de visualizacion.");
+        
+                alerta2.setHeaderText("Album vacío");
+                App.setRoot("visualizarAlbumes");
+                alerta2.show();
+            }else{
+                
+                nodo = nodo.getPrevious();
+                fotoActual = nodo.getContent();
+                llenarImageView(fotoActual);
+            }
+            
 
         }else{
             System.out.println("No problem");

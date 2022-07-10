@@ -70,8 +70,13 @@ public class FiltrarFotosController implements Initializable{
         ArrayList<Foto> resultado=new ArrayList();
         for(int i=0;i<fotos.size();i++){
             if(fotos.get(i).getPersonas()!=null){
-                if((fotos.get(i).getPersonas().findSame(cmp,tmp)).size()!=0){
-                    resultado.addFirst(fotos.get(i));
+//                if((fotos.get(i).getPersonas().findSame(cmp,tmp)).size()!=0){
+//                    resultado.addFirst(fotos.get(i));
+                for(Persona p : fotos.get(i).getPersonas()){
+                    if(cmp.compare(p, tmp)==0){
+                        resultado.addFirst(fotos.get(i));
+                    }
+                    
                 }
             }        
         }   

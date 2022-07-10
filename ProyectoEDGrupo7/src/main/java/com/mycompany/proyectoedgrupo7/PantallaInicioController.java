@@ -22,7 +22,7 @@ public class PantallaInicioController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        Album.crearArchivoAlbumes(App.pathAlbumes);
+        //Album.crearArchivoAlbumes(App.pathAlbumes);
         Persona.crearArchivoPersonas(App.pathPersonas);
         
     }    

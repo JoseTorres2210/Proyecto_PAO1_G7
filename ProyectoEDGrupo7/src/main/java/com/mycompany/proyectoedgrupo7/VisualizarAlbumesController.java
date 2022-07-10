@@ -150,9 +150,12 @@ public class VisualizarAlbumesController implements Initializable {
             LinkedList<Album> lista = Album.leerArchivoAlbumes(App.pathAlbumes);
             System.out.println(lista.contains(a));
             int indice = lista.indexOf(a);
-            System.out.println(lista);
-            System.out.println(indice);
+            System.out.println("Lista antes de la eliminacion: "+lista.size());
+            System.out.println("Indice a eliminar----->>>>: "+indice);
+            System.out.println("Elemento a eliminar: "+lista.get(indice));
             lista.remove(indice); 
+            
+            System.out.println("Lista despues de la eliminacion: "+lista.size());
             
             //Se actualiza el archivo
             Album.actualizarListaAlbumes(lista, App.pathAlbumes);

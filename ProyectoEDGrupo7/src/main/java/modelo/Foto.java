@@ -3,9 +3,11 @@ import TDAs.ArrayList;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Foto implements Serializable{
-    private ArrayList<Persona> personas;
+    private Set<Persona> personas;
     private LocalDate fecha;
     private String lugar;
     private String descripcion;
@@ -22,7 +24,7 @@ public class Foto implements Serializable{
         this.album = album;
     }
 
-    public Foto(ArrayList<Persona> personas, LocalDate fecha, String lugar,String descripcion){
+    public Foto(Set<Persona> personas, LocalDate fecha, String lugar,String descripcion){
         this.personas= personas;
         this.fecha=fecha;
         this.lugar=lugar;
@@ -33,7 +35,7 @@ public class Foto implements Serializable{
         this.fecha=fecha;
         this.lugar=lugar;
         this.descripcion=descripcion;
-        this.personas = new ArrayList<>();   //Xq no hay personas en la foto
+        this.personas = new HashSet<>();   //Xq no hay personas en la foto
     }
 
     public LocalDate getFecha() {
@@ -76,50 +78,54 @@ public class Foto implements Serializable{
         this.imagen = imagen;
     }
 
-    public ArrayList<Persona> getPersonas() {
+    public Set<Persona> getPersonas() {
         return personas;
     }
 
-    public void setPersona(ArrayList<Persona> personas) {
+    public void setPersona(Set<Persona> personas) {
         this.personas = personas;
     }
     
     
     public boolean agregarPersonaEnFoto(Persona persona){
-        boolean retorno = false;
+        boolean retorno = true;
         //Debemos agregar una persona a una foto SOLO SI ESTA NO SE ENCUENTRA EN LA LISTA PREVIAMENTE
-        if(personas.isEmpty()){
-            personas.addLast(persona);
-            return true;
-        }
-        for(Persona p : personas){
-            if(!p.equals(persona)){
-                System.out.println("NO HAY COINCIDENCIA");
-                //La agregamos a la lista
-                personas.addLast(persona);
-                retorno =  true;
-            }else{
-                System.out.println("LA PERSONA YA ESTA EN LA LISTAAAAA");
-            }
-        }
+//        if(personas.isEmpty()){
+//            personas.add(persona);
+//            return true;
+//        }
+//        for(Persona p : personas){
+//            if(!p.equals(persona)){
+//                System.out.println("NO HAY COINCIDENCIA");
+//                //La agregamos a la lista
+//                personas.add(persona);
+//                retorno =  true;
+//            }else{
+//                System.out.println("LA PERSONA YA ESTA EN LA LISTAAAAA");
+//            }
+//        }
+        personas.add(persona);
         return retorno;
     }
     
     
     public boolean eliminarPersonaDeFoto(Persona persona){
         boolean retorno = false;
-        //Debemos eliminar a esa persona a una foto SOLO SI ESTA NO SE ENCUENTRA EN LA LISTA PREVIAMENTE
-        for(Persona p : personas){
-            if(p.equals(persona)){
-                //La eliminamos
-                int indice = personas.indexOf(p);
-                personas.remove(indice);
-                retorno =  true;
-            }else{
-                System.out.println("LA PERSONA NO ESTABA EN LA LISTA");
-            }
-        }
-        return retorno;
+        
+//        //Debemos eliminar a esa persona a una foto SOLO SI ESTA NO SE ENCUENTRA EN LA LISTA PREVIAMENTE
+//        for(Persona p : personas){
+//            if(p.equals(persona)){
+//                //La eliminamos
+//                int indice = personas.indexOf(p);
+//                personas.remove(indice);
+//                retorno =  true;
+//            }else{
+//                System.out.println("LA PERSONA NO ESTABA EN LA LISTA");
+//            }
+//        }
+//        return retorno;
+          
+          return personas.remove(persona);
     }
     
     

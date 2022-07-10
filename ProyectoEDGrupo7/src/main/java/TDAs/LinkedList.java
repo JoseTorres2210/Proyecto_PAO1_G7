@@ -120,7 +120,7 @@ public class LinkedList<E> implements List<E>,Iterable<E>,Serializable{
         this.setFirst(null);
         this.setLast(null);
     }
-
+    
     @Override
     public void add(int index, E element) {
         if(element ==null){
@@ -154,7 +154,7 @@ public class LinkedList<E> implements List<E>,Iterable<E>,Serializable{
             }
         }
     }
-
+ 
     @Override
     public E remove(int index) {
         if(index<0||index>=this.size()){

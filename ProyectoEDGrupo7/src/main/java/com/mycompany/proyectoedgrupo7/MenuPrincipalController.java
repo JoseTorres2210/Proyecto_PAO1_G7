@@ -5,6 +5,7 @@
  */
 package com.mycompany.proyectoedgrupo7;
 
+import TDAs.LinkedList;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -30,6 +31,18 @@ public class MenuPrincipalController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         System.out.println(Album.leerArchivoAlbumes(App.pathAlbumes));
+        LinkedList<Integer> l1 = new LinkedList<>();
+        for(int i =0;i<=10;i++){
+            l1.addLast(i);
+        }
+        System.out.println("LISTA---->: "+l1);
+        l1.remove(l1.size()-1);
+        System.out.println("REMOVIENDO EL ULTIMO ELEMENTO---->: "+l1);
+        System.out.println("AGREGANDO DESPUES DE REMOVER");
+        l1.add(l1.size(), 15555);
+        System.out.println(l1);
+        
+        
         try{
 
             //Tener una CircularLinkedList para simular la repeticion de las imagenes

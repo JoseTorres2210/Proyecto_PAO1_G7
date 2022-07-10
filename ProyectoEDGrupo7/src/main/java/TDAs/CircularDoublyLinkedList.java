@@ -17,13 +17,18 @@ import java.util.Comparator;
  * @author josel
  */
 public class CircularDoublyLinkedList<E> implements List<E>,Serializable {
-    
-    private CircularNode<E> first;
+    private static final long serialVersionUID = 4565043500258033555L;
+    public CircularNode<E> first;
     
     public CircularDoublyLinkedList(){
         first=null;
     }
-
+    
+    public CircularNode<E> getCurrentNode(){
+        return this.first;
+        
+    }
+    
     @Override
     public boolean addFirst(E element) {
         CircularNode<E> nodo = new CircularNode<>(element);

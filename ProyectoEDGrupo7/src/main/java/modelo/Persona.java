@@ -190,6 +190,16 @@ public class Persona implements Serializable{
             System.out.println("Error general: "+e);
         }
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 53 * hash + Objects.hashCode(this.nombre);
+        hash = 53 * hash + Objects.hashCode(this.apellido);
+        return hash;
+    }
+        
+    
         
         
         

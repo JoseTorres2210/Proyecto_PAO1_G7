@@ -97,7 +97,7 @@ public class Album implements Serializable,Comparable<Album>{
 
     @Override
     public String toString() {
-        return nombre + ": " + descripcion;
+        return nombre;
     }
     
     
@@ -107,9 +107,7 @@ public class Album implements Serializable,Comparable<Album>{
     Metodo para escribir o agregar un album a un archivo serializado
     */
     
-    public void agregarAlbum(){
-        
-    }
+
     
     
     /*
@@ -131,7 +129,7 @@ public class Album implements Serializable,Comparable<Album>{
         listaAlbumes.addLast(a3);
         listaAlbumes.addLast(a4);
         listaAlbumes.addLast(a5);
-
+        
         //Se escriben los albumes
         try(ObjectOutputStream escritor = new ObjectOutputStream(new FileOutputStream(path))){            
             escritor.writeObject(listaAlbumes);
@@ -163,7 +161,9 @@ public class Album implements Serializable,Comparable<Album>{
     
     public static void agregarNuevoAlbumArchivo(Album album,String path){
         LinkedList<Album> listaAlbums = leerArchivoAlbumes(path);
+        System.out.println(">>>>>>>>ALBUM ANTES DE AGG:"+ listaAlbums);
         listaAlbums.addLast(album);
+        System.out.println(">>>>>>>>>ALBUM DESPUES DE AGG:"+ listaAlbums);
         try(ObjectOutputStream escritor = new ObjectOutputStream(new FileOutputStream(path))){
             //Se escribe la lista con los auspiciantes actualizada
             escritor.writeObject(listaAlbums);

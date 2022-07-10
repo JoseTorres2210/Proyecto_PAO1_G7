@@ -6,6 +6,7 @@
 package com.mycompany.proyectoedgrupo7;
 
 import TDAs.CircularDoublyLinkedList;
+import TDAs.CircularNode;
 import TDAs.LinkedList;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -41,9 +42,12 @@ public class VisualizarFotosEnAlbumController implements Initializable {
     private ImageView imgvFotos;
     
     public static Album albumOG;
-    private Foto fotoActual;
+    
     int numFoto = 0;
-    private CircularDoublyLinkedList<Foto> fotos = fotos = albumOG.getFotos();;
+    private CircularDoublyLinkedList<Foto> fotos = albumOG.getFotos();
+    private  CircularNode<Foto> nodo = fotos.first;
+    private Foto fotoActual = nodo.getContent();
+    
     /**
      * Initializes the controller class.
      */
@@ -52,14 +56,18 @@ public class VisualizarFotosEnAlbumController implements Initializable {
         // TODO
         if(albumOG!=null)
             lblNombreAlbumFotos.setText(albumOG.getNombre());
-        llenarImageView();
-        fotoActual = albumOG.getFotos().get(numFoto);
-        
+        llenarImageView(fotoActual);
+        CircularNode<Foto> nodo = albumOG.getFotos().getCurrentNode();
+        //fotoActual = nodo.getContent();
+        System.out.println("----->"+fotoActual);
     }    
     
     @FXML
     private void mostrarFotoAnterior(ActionEvent event) {
-        System.out.println("Se muestra la foto anterior en la lista circular de fotos");
+        nodo = nodo.getPrevious();
+        fotoActual = nodo.getContent();
+        llenarImageView(fotoActual);
+        System.out.println(fotoActual);
         
     }
 
@@ -82,9 +90,13 @@ public class VisualizarFotosEnAlbumController implements Initializable {
     @FXML
     private void mostrarFotoSiguiente(ActionEvent event) {
         System.out.println("Se muestra la foto siguiente");
-        
-        fotoActual = fotos.get(numFoto++);
-        llenarImageView();
+        System.out.println("******" +fotos);
+        nodo = nodo.getNext();
+
+        fotoActual = nodo.getContent();
+        System.out.println(fotoActual);
+        System.out.println("******" +fotos);
+        llenarImageView(fotoActual);
     }
     
     
@@ -96,13 +108,13 @@ public class VisualizarFotosEnAlbumController implements Initializable {
     Enviarle un iterador al metodo imageView???
     ##################
     */
-    private void llenarImageView(){
+    private void llenarImageView(Foto foto){
         
-        System.out.println(fotos.get(numFoto).getNomAlbum());
-        System.out.println(fotos.get(numFoto).getImagen());
+
         
         try{            
-            String filename = "archivos/fotos/"+fotos.get(numFoto).getImagen(); 
+            //String filename = "archivos/fotos/"+fotos.get(numFoto).getImagen(); 
+            String filename = "archivos/fotos/"+foto.getImagen();
             Image image = new Image(new FileInputStream(filename));
             imgvFotos.setImage(image);
         }catch (FileNotFoundException ex) { 

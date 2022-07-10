@@ -6,6 +6,7 @@
 package TDAs;
 
 import java.io.Serializable;
+import java.util.Comparator;
 
 /**
  *
@@ -242,5 +243,37 @@ public class CircularDoublyLinkedList<E> implements List<E>,Serializable {
         return s;
     }
 
+    public CircularDoublyLinkedList<E> findSame(Comparator<E> cmp,E anotherElement){
+        CircularDoublyLinkedList<E> result=new CircularDoublyLinkedList<E>();
+        
+        for(int i=0;i<this.size();i++){
+            if(cmp.compare(this.get(i), anotherElement)==0){
+                result.addLast(this.get(i));           
+            }            
+        }    
+        return result;
+    }
+    
+    public CircularDoublyLinkedList<E> findSmall(Comparator<E> cmp,E anotherElement){
+        CircularDoublyLinkedList<E> result=new CircularDoublyLinkedList<E>();
+        
+        for(int i=0;i<this.size();i++){
+            if(cmp.compare(this.get(i), anotherElement)>0){
+                result.addLast(this.get(i));           
+            }            
+        }    
+        return result;
+    }
+    
+    public CircularDoublyLinkedList<E> findBig(Comparator<E> cmp,E anotherElement){
+        CircularDoublyLinkedList<E> result=new CircularDoublyLinkedList<E>();
+        
+        for(int i=0;i<this.size();i++){
+            if(cmp.compare(this.get(i), anotherElement)<0){
+                result.addLast(this.get(i));           
+            }            
+        }    
+        return result;
+    }
     
 }

@@ -73,7 +73,10 @@ public class FiltrarFotosController implements Initializable{
             String[] array=txtPersona.getText().split(",");
             String primero=array[0];
             String[] elementos=primero.split(" ");
-            listaFotosFiltradas= filtrarPersonaAlbum(lista,elementos[0],elementos[1]);
+            if(elementos.length==1){
+                listaFotosFiltradas= filtrarPersonaAlbum(lista,elementos[0],null);
+            }
+            else{listaFotosFiltradas= filtrarPersonaAlbum(lista,elementos[0],elementos[1]);}
             int counter= 1;
             while(counter<array.length){
                 String tmp=array[counter];
@@ -144,7 +147,12 @@ public class FiltrarFotosController implements Initializable{
         for(int i=0;i<fotos.size();i++){
             if(fotos.get(i).getPersonas()!=null){
                 for(Persona p : fotos.get(i).getPersonas()){
-                    if(cmp1.compare(p, tmp)==0 && cmp2.compare(p, tmp)==0){
+                    if(apellido==null){
+                        if(cmp1.compare(p, tmp)==0){
+                        resultado.addFirst(fotos.get(i));
+                        }                        
+                    }
+                    else if(cmp1.compare(p, tmp)==0 && cmp2.compare(p, tmp)==0){
                         resultado.addFirst(fotos.get(i));
                     }
                 }

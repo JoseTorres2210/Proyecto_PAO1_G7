@@ -41,7 +41,13 @@ public class FiltrarFotosController implements Initializable{
     private CheckBox filtrarFecha;
     
     public void initialize(URL url, ResourceBundle rb) {
-        
+
+        fechaDesde.setVisible(false);
+        fechaHasta.setVisible(false);
+        txtPersona.setVisible(false);
+        txtLugar.setVisible(false);
+
+
     }
 
     @FXML
@@ -60,6 +66,39 @@ public class FiltrarFotosController implements Initializable{
         if(filtrarLugar.isSelected()){
             
         }
+    }
+
+    @FXML
+    private void unlockP() {
+        /*
+        Metodo para desbloquear y bloquear diferentes parametros de filtrado
+        */
+        if(filtrarPersona.isSelected()){
+            txtPersona.setVisible(true);
+        }else{
+            txtPersona.setVisible(false);
+        }
+    }
+
+    @FXML
+    private void unlockL(){
+        if (filtrarLugar.isSelected()){
+            txtLugar.setVisible(true);
+        }else{
+            txtLugar.setVisible(false);
+        }
+    }
+    
+    @FXML
+    private void unlockF(){
+        if(filtrarFecha.isSelected()){
+            fechaDesde.setVisible(true);
+            fechaHasta.setVisible(true);
+        }else{
+            fechaDesde.setVisible(false);
+            fechaHasta.setVisible(false);
+        }
+
     }
     
     

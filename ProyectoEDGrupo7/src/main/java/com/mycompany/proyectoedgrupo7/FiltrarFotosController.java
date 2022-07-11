@@ -2,6 +2,7 @@ package com.mycompany.proyectoedgrupo7;
 
 import TDAs.ArrayList;
 import TDAs.CircularDoublyLinkedList;
+import TDAs.LinkedList;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
@@ -58,14 +59,26 @@ public class FiltrarFotosController implements Initializable{
 
     
     private void buscar(ActionEvent event){
+       LinkedList<Album> lista = Album.leerArchivoAlbumes(App.pathAlbumes);
+        CircularDoublyLinkedList<Foto> result= new CircularDoublyLinkedList<Foto>();
         if(filtrarPersona.isSelected()){
-            
+            result= filtrarPersonaAlbum(lista,txtPersona.getText());
         }
         if(filtrarFecha.isSelected()){
-            
+            if(result.isEmpty()){
+                result= filtrarFechaAlbum(lista,fechaDesde,fechaHasta);
+            }
+            else{
+                result= filtrarFechaFoto(result,fechaDesde,fechaHasta);
+            }
         }
         if(filtrarLugar.isSelected()){
-            
+            if(result.isEmpty()){
+                result= filtrarLugarAlbum(lista,txtLugar.getText());
+            }
+            else{
+                result= filtrarLugarFoto(result,txtLugar.getText());
+            }
         }
     }
 
@@ -123,7 +136,7 @@ public class FiltrarFotosController implements Initializable{
         return resultado;
     }
     
-    public static CircularDoublyLinkedList<Foto> filtrarPersonaAlbum(ArrayList<Album> albumes,String nombre){
+    public static CircularDoublyLinkedList<Foto> filtrarPersonaAlbum(LinkedList<Album> albumes,String nombre){
         CircularDoublyLinkedList<Foto> result=new CircularDoublyLinkedList<Foto>();
         for(Album album:albumes){
             ArrayList<Foto> fotos=filtrarPersonaFoto(album.getFotos(), nombre);
@@ -147,7 +160,7 @@ public class FiltrarFotosController implements Initializable{
     
     }
     
-    public static CircularDoublyLinkedList<Foto> filtrarLugarAlbum(ArrayList<Album> albumes,String lugar){
+    public static CircularDoublyLinkedList<Foto> filtrarLugarAlbum(LinkedList<Album> albumes,String lugar){
         CircularDoublyLinkedList<Foto> result=new CircularDoublyLinkedList<Foto>();
         for(Album album:albumes){
             CircularDoublyLinkedList<Foto> fotos=filtrarLugarFoto(album.getFotos(), lugar);
@@ -186,7 +199,7 @@ public class FiltrarFotosController implements Initializable{
            return resultado;
     }
     
-    public static CircularDoublyLinkedList<Foto> filtrarFechaAlbum(ArrayList<Album> albumes,DatePicker fechaInicio,DatePicker fechaFin){
+    public static CircularDoublyLinkedList<Foto> filtrarFechaAlbum(LinkedList<Album> albumes,DatePicker fechaInicio,DatePicker fechaFin){
         CircularDoublyLinkedList<Foto> result=new CircularDoublyLinkedList<Foto>();
         for(Album album:albumes){
             CircularDoublyLinkedList<Foto> fotos=filtrarFechaFoto(album.getFotos(),fechaInicio,fechaFin);

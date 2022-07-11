@@ -39,13 +39,14 @@ public class FiltrarFotosController implements Initializable{
     private CheckBox filtrarLugar;
     @FXML
     private CheckBox filtrarFecha;
-    
+    private CircularDoublyLinkedList<Foto> listaFotosFiltradas;
     public void initialize(URL url, ResourceBundle rb) {
 
         fechaDesde.setVisible(false);
         fechaHasta.setVisible(false);
         txtPersona.setVisible(false);
         txtLugar.setVisible(false);
+        listaFotosFiltradas = new CircularDoublyLinkedList<>();
 
 
     }
@@ -206,8 +207,8 @@ public class FiltrarFotosController implements Initializable{
         ############################################
         */
         
-        
-        //
+        //OJO CON ESTA LINEA
+        MostrarResultadosFiltroController.listaFotosFiltradas = listaFotosFiltradas;
         
         
         

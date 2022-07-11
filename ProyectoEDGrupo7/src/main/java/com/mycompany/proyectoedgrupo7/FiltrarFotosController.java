@@ -4,6 +4,7 @@ import TDAs.ArrayList;
 import TDAs.CircularDoublyLinkedList;
 import TDAs.LinkedList;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.Comparator;
@@ -69,7 +70,16 @@ public class FiltrarFotosController implements Initializable{
     private void buscar(){
        LinkedList<Album> lista = Album.leerArchivoAlbumes(App.pathAlbumes);
         if(filtrarPersona.isSelected()){
-            listaFotosFiltradas= filtrarPersonaAlbum(lista,txtPersona.getText());
+            String[] array=txtPersona.getText().split(",");
+            String primero=array[0];
+            String[] elementos=primero.split(" ");
+            listaFotosFiltradas= filtrarPersonaAlbum(lista,elementos[0],elementos[1]);
+            int counter= 1;
+            while(counter<array.length){
+                String tmp=array[counter];
+                elementos=tmp.split(" ");
+                listaFotosFiltradas= filtrarPersonaFoto(listaFotosFiltradas,elementos[0],elementos[1]);
+            }
         }
         if(filtrarFecha.isSelected()){
             if(listaFotosFiltradas.isEmpty()){
@@ -123,17 +133,19 @@ public class FiltrarFotosController implements Initializable{
     }
     
     
-    private static ArrayList<Foto> filtrarPersonaFoto(CircularDoublyLinkedList<Foto> fotos,String nombre){
-        Comparator<Persona> cmp = (Persona p1,Persona p2) -> p1.getNombre()
-                .compareTo(p2.getNombre());
-        Persona tmp=new Persona(nombre,null);
-        ArrayList<Foto> resultado=new ArrayList();
+    private static CircularDoublyLinkedList<Foto> filtrarPersonaFoto(CircularDoublyLinkedList<Foto> fotos,String nombre,String apellido){
+        Comparator<Persona> cmp1 = (Persona p1,Persona p2) -> p1.getNombre().toLowerCase()
+                .compareTo(p2.getNombre().toLowerCase());
+        Comparator<Persona> cmp2 = (Persona p1,Persona p2) -> p1.getApellido().toLowerCase()
+                .compareTo(p2.getApellido().toLowerCase());
+        Persona tmp=new Persona(nombre,apellido);
+        CircularDoublyLinkedList<Foto> resultado=new CircularDoublyLinkedList<Foto>();
         for(int i=0;i<fotos.size();i++){
             if(fotos.get(i).getPersonas()!=null){
 //                if((fotos.get(i).getPersonas().findSame(cmp,tmp)).size()!=0){
 //                    resultado.addFirst(fotos.get(i));
                 for(Persona p : fotos.get(i).getPersonas()){
-                    if(cmp.compare(p, tmp)==0){
+                    if(cmp1.compare(p, tmp)==0 && cmp2.compare(p, tmp)==0){
                         resultado.addFirst(fotos.get(i));
                     }
                     
@@ -143,12 +155,13 @@ public class FiltrarFotosController implements Initializable{
         return resultado;
     }
     
-    public static CircularDoublyLinkedList<Foto> filtrarPersonaAlbum(LinkedList<Album> albumes,String nombre){
+    public static CircularDoublyLinkedList<Foto> filtrarPersonaAlbum(LinkedList<Album> albumes,String nombre,String apellido){
         CircularDoublyLinkedList<Foto> result=new CircularDoublyLinkedList<Foto>();
         for(Album album:albumes){
-            ArrayList<Foto> fotos=filtrarPersonaFoto(album.getFotos(), nombre);
-            for(Foto foto:fotos){
-                result.addLast(foto);
+            CircularDoublyLinkedList<Foto> fotos=filtrarPersonaFoto(album.getFotos(), nombre, apellido);
+            int counter=0;
+            while(counter<fotos.size()){
+                result.addLast(fotos.get(counter));
             } 
         }
         return result;

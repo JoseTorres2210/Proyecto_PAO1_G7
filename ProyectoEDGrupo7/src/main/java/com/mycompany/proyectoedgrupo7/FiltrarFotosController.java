@@ -60,24 +60,23 @@ public class FiltrarFotosController implements Initializable{
     
     private void buscar(ActionEvent event){
        LinkedList<Album> lista = Album.leerArchivoAlbumes(App.pathAlbumes);
-        CircularDoublyLinkedList<Foto> result= new CircularDoublyLinkedList<Foto>();
         if(filtrarPersona.isSelected()){
-            result= filtrarPersonaAlbum(lista,txtPersona.getText());
+            listaFotosFiltradas= filtrarPersonaAlbum(lista,txtPersona.getText());
         }
         if(filtrarFecha.isSelected()){
-            if(result.isEmpty()){
-                result= filtrarFechaAlbum(lista,fechaDesde,fechaHasta);
+            if(listaFotosFiltradas.isEmpty()){
+                listaFotosFiltradas= filtrarFechaAlbum(lista,fechaDesde,fechaHasta);
             }
             else{
-                result= filtrarFechaFoto(result,fechaDesde,fechaHasta);
+                listaFotosFiltradas= filtrarFechaFoto(listaFotosFiltradas,fechaDesde,fechaHasta);
             }
         }
         if(filtrarLugar.isSelected()){
-            if(result.isEmpty()){
-                result= filtrarLugarAlbum(lista,txtLugar.getText());
+            if(listaFotosFiltradas.isEmpty()){
+                listaFotosFiltradas= filtrarLugarAlbum(lista,txtLugar.getText());
             }
             else{
-                result= filtrarLugarFoto(result,txtLugar.getText());
+                listaFotosFiltradas= filtrarLugarFoto(listaFotosFiltradas,txtLugar.getText());
             }
         }
     }
@@ -221,7 +220,7 @@ public class FiltrarFotosController implements Initializable{
         */
         
         //OJO CON ESTA LINEA
-        MostrarResultadosFiltroController.listaFotosFiltradas = listaFotosFiltradas;
+        MostrarResultadosFiltroController.listaFotosFiltradas = result;
         
         
         

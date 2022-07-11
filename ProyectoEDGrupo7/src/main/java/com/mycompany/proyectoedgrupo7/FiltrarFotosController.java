@@ -220,7 +220,7 @@ public class FiltrarFotosController implements Initializable{
         */
         
         //OJO CON ESTA LINEA
-        MostrarResultadosFiltroController.listaFotosFiltradas = result;
+        MostrarResultadosFiltroController.listaFotosFiltradas = listaFotosFiltradas;
         
         
         

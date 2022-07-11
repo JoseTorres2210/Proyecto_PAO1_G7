@@ -79,6 +79,7 @@ public class FiltrarFotosController implements Initializable{
                 String tmp=array[counter];
                 elementos=tmp.split(" ");
                 listaFotosFiltradas= filtrarPersonaFoto(listaFotosFiltradas,elementos[0],elementos[1]);
+                counter++;
             }
         }
         if(filtrarFecha.isSelected()){
@@ -142,13 +143,10 @@ public class FiltrarFotosController implements Initializable{
         CircularDoublyLinkedList<Foto> resultado=new CircularDoublyLinkedList<Foto>();
         for(int i=0;i<fotos.size();i++){
             if(fotos.get(i).getPersonas()!=null){
-//                if((fotos.get(i).getPersonas().findSame(cmp,tmp)).size()!=0){
-//                    resultado.addFirst(fotos.get(i));
                 for(Persona p : fotos.get(i).getPersonas()){
                     if(cmp1.compare(p, tmp)==0 && cmp2.compare(p, tmp)==0){
                         resultado.addFirst(fotos.get(i));
                     }
-                    
                 }
             }        
         }   
@@ -162,6 +160,7 @@ public class FiltrarFotosController implements Initializable{
             int counter=0;
             while(counter<fotos.size()){
                 result.addLast(fotos.get(counter));
+                counter++;
             } 
         }
         return result;

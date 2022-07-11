@@ -15,7 +15,9 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 
 import javafx.scene.control.Button;
@@ -93,6 +95,25 @@ public class VisualizarFotosEnAlbumController implements Initializable {
     @FXML
     private void editarPersonasEnFoto(ActionEvent event) {
         System.out.println("Se cambia a una ventana de edicion de personas en la foto");
+        CrearFoto2Controller.fotoOG2 = fotoActual;
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("crearFoto2.fxml"));//no tiene el controlador especificado
+            //CrearCiudadController ct = new CrearCiudadController(); //Recien aqui se esta creando el controlador
+            Parent root = (Parent) fxmlLoader.load();
+            CrearFoto2Controller ct = fxmlLoader.getController();
+            fxmlLoader.setController(ct);//se asigna el controlador
+
+            ct.llenarCampos(fotoActual); 
+            App.changeRoot(root);
+            
+        }catch (IOException ex) {
+            System.out.println("Error fatal: "+ex);
+            
+            
+        }catch(Exception e){
+            System.out.println("Excepcion general: "+e);
+        } 
+        
     }
 
     @FXML
@@ -115,16 +136,7 @@ public class VisualizarFotosEnAlbumController implements Initializable {
     
     
     //Metodo para llenar el imagview
-    
-    /*
-    ##################
-    Enviarle un iterador al metodo imageView???
-    ##################
-    */
-    private void llenarImageView(Foto foto){
-        
-
-        
+    private void llenarImageView(Foto foto){    
         try{            
             //String filename = "archivos/fotos/"+fotos.get(numFoto).getImagen(); 
             String filename = "archivos/fotos/"+foto.getImagen();

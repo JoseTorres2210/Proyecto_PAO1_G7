@@ -60,23 +60,26 @@ public class CrearFoto2Controller implements Initializable {
     @FXML
     private TableColumn<Persona, Void> tcOpciones;
     public static Foto fotoOG;
+    public static Foto fotoOG2;
+    private boolean edicion = false;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       tvPersonasEnSistema.setVisible(false);
+        edicion = false;
+        tvPersonasEnSistema.setVisible(false);
         
-       tcPersonas.setCellValueFactory(new PropertyValueFactory<>("nombreCompleto"));
-        ObservableList<Persona> l = FXCollections.observableArrayList();
-        for(Persona p :Persona.leerArchivoPersonas(App.pathPersonas)){
-            System.out.println(p.getNombreCompleto());
-            l.add(p);
-            System.out.println(p);
-        }
-        System.out.println(l);
-        tvPersonasEnSistema.getItems().addAll(l);
-        agregarOpciones();
+        tcPersonas.setCellValueFactory(new PropertyValueFactory<>("nombreCompleto"));
+         ObservableList<Persona> l = FXCollections.observableArrayList();
+         for(Persona p :Persona.leerArchivoPersonas(App.pathPersonas)){
+             System.out.println(p.getNombreCompleto());
+             l.add(p);
+             System.out.println(p);
+         }
+         System.out.println(l);
+         tvPersonasEnSistema.getItems().addAll(l);
+         agregarOpciones();
         
     }    
     
@@ -155,7 +158,6 @@ public class CrearFoto2Controller implements Initializable {
                             Button btnEditar = new Button("Modificar Persona");
                             btnEl.setDisable(true);
                             Button btnEd = new Button("Agregar a foto");
-                            
                             btnEd.setOnAction(e ->{
                                 
                                 System.out.println("Se agrega la persona a la foto: "+persona);
@@ -180,12 +182,15 @@ public class CrearFoto2Controller implements Initializable {
                             });
            
                             
-                            
-                            
                             //se agregan botones al hbox
                             hbOpciones.getChildren().addAll(btnEd,btnEl);
                             //se ubica hbox en la celda
                             setGraphic(hbOpciones);
+                            if(edicion){
+                                btnEl.setVisible(false);
+                                btnEd.setVisible(false);
+                            }
+                            
                         }
                     }
                 };
@@ -194,6 +199,37 @@ public class CrearFoto2Controller implements Initializable {
         };
 
         tcOpciones.setCellFactory(cellFactory);
+    }
+    
+    
+    
+    public void llenarCampos(Foto f){
+        
+        edicion = true;
+        buttonCancelar.setOnAction(e ->{
+            try {
+                App.setRoot("visualizarFotosEnAlbum");
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        });
+        tvPersonasEnSistema.getItems().clear();
+        lblPersonasEnFoto.setVisible(false);
+        lblCrearFoto.setText("Personas en esta foto: ");
+        rbNoHayPersonas.setVisible(false);
+        rbSiHayPersonas.setVisible(false);
+        tvPersonasEnSistema.setVisible(true);
+        tcPersonas.setCellValueFactory(new PropertyValueFactory<>("nombreCompleto"));
+        ObservableList<Persona> l = FXCollections.observableArrayList();
+         for(Persona p :f.getPersonas()){
+             System.out.println(p.getNombreCompleto());
+             l.add(p);
+             System.out.println(p);
+         }
+         System.out.println(l);
+         tvPersonasEnSistema.getItems().addAll(l);
+         //agregarOpciones();
+         
     }
 
 }

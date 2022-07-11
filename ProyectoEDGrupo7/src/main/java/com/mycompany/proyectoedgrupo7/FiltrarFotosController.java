@@ -12,6 +12,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
@@ -48,7 +49,14 @@ public class FiltrarFotosController implements Initializable{
         txtPersona.setVisible(false);
         txtLugar.setVisible(false);
         listaFotosFiltradas = new CircularDoublyLinkedList<>();
-
+//        CheckComboBox cb = new CheckComboBox();
+        Alert info = new Alert(Alert.AlertType.INFORMATION);
+        
+        info.setTitle("Importante");
+        info.setHeaderText("Filtrado: ");
+        info.setContentText("Si desea filtrar sus fotos por varias personas\nasegúrese de separar"
+                + " el nombre completo de cada persona \nusando comas");
+        info.show();
 
     }
 
@@ -58,7 +66,7 @@ public class FiltrarFotosController implements Initializable{
     }
 
     
-    private void buscar(ActionEvent event){
+    private void buscar(){
        LinkedList<Album> lista = Album.leerArchivoAlbumes(App.pathAlbumes);
         if(filtrarPersona.isSelected()){
             listaFotosFiltradas= filtrarPersonaAlbum(lista,txtPersona.getText());
@@ -220,6 +228,7 @@ public class FiltrarFotosController implements Initializable{
         */
         
         //OJO CON ESTA LINEA
+        buscar();
         MostrarResultadosFiltroController.listaFotosFiltradas = listaFotosFiltradas;
         
         

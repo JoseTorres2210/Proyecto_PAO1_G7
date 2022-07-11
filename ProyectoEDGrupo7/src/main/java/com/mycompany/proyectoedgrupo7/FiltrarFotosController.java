@@ -39,9 +39,9 @@ public class FiltrarFotosController implements Initializable{
     private CheckBox filtrarLugar;
     @FXML
     private CheckBox filtrarFecha;
-
+    
     public void initialize(URL url, ResourceBundle rb) {
-
+        
     }
 
     @FXML
@@ -158,6 +158,20 @@ public class FiltrarFotosController implements Initializable{
     }
 
     @FXML
-    private void switchToMostrarResultadoFiltro(ActionEvent event) {
+    private void switchToMostrarResultadoFiltro(ActionEvent event) throws IOException {
+        /*
+        ###########################################
+        Es necesario guardar en una lista circular las fotos resultantes del filtro
+        para luego asignar esa lista al atributo estatico que contendra la lista
+        de fotos resultantes en la clase MostrarResultadoFiltroController
+        ############################################
+        */
+        
+        
+        //
+        
+        
+        
+        App.setRoot("mostrarResultadosFiltro");
     }
 }

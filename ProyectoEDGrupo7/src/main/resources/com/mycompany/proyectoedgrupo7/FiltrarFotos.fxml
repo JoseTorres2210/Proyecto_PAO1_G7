@@ -80,7 +80,7 @@
             </TextField>
             <HBox prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <CheckBox fx:id="filtrarPersona" mnemonicParsing="false">
+                  <CheckBox fx:id="filtrarPersona" mnemonicParsing="false" onAction="#unlockP">
                      <padding>
                         <Insets left="20.0" top="30.0" />
                      </padding>
@@ -94,7 +94,7 @@
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
                <children>
-                  <CheckBox fx:id="filtrarFecha" mnemonicParsing="false">
+                  <CheckBox fx:id="filtrarFecha" mnemonicParsing="false" onAction="#unlockF">
                      <padding>
                         <Insets left="20.0" top="30.0" />
                      </padding>
@@ -108,7 +108,7 @@
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
                <children>
-                  <CheckBox fx:id="filtrarLugar" mnemonicParsing="false">
+                  <CheckBox fx:id="filtrarLugar" mnemonicParsing="false" onAction="#unlockL">
                      <padding>
                         <Insets left="20.0" top="30.0" />
                      </padding>

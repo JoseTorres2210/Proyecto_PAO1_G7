@@ -11,7 +11,10 @@ import com.mycompany.proyectoedgrupo7.App;
 import static com.mycompany.proyectoedgrupo7.CrearFoto2Controller.fotoOG;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.Set;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -19,7 +22,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -150,6 +155,35 @@ public class PersonasEnSistemaController implements Initializable {
         Logica para la eliminacion de la persona de los registros
         #################################################
         */
+        try{
+        Alert alerta = new Alert(Alert.AlertType.WARNING,"Recuerde que esta acción es irreversible. \n¿Seguro que desea continuar?");
+        
+        alerta.setHeaderText("Eliminacion de persona");
+        alerta.showAndWait();
+        
+        Alert confirmacion = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmacion.setHeaderText("Eliminacion");
+        confirmacion.setContentText("Se procederá a eliminar la persona de los registros.\n ¿Continuar?");
+        Optional<ButtonType> result = confirmacion.showAndWait();
+        if(result.get()==ButtonType.OK){
+            //Se elimina el objeto del conjunto
+            Set<Persona> personas = Persona.leerArchivoPersonas(App.pathPersonas);
+            personas.remove(p); //Se elimina la ocurrencia del conjunto
+
+            
+            //Se actualiza el archivo
+            Persona.actualizarListaPersonas(personas, App.pathPersonas);
+            App.setRoot("personasEnSistema");
+
+        }else{
+            System.out.println("No problem");
+        }
+        }catch(Exception e){
+            System.out.println("Error al eliminar la persona: "+e.getLocalizedMessage());
+            e.printStackTrace();
+            e.getCause();
+           
+        }
     }
     
 }

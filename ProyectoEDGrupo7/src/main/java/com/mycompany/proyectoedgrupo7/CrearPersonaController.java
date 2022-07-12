@@ -67,9 +67,12 @@ public class CrearPersonaController implements Initializable {
             exito.show();
             
             if(creacionPersonaEnArchivoNuevo){
+                creacionPersonaEnArchivoNuevo = false;
                 App.setRoot("personasEnSistema");
             }else{
+                creacionPersonaEnArchivoNuevo = false;
                 App.setRoot("crearFoto2");
+                
             }
             
         }catch(EmptyFieldsException e){
@@ -96,8 +99,10 @@ public class CrearPersonaController implements Initializable {
         //Se retorna a la parte anterior
         
         if(creacionPersonaEnArchivoNuevo){
+            creacionPersonaEnArchivoNuevo = false;
             App.setRoot("personasEnSistema");
         }else{
+            creacionPersonaEnArchivoNuevo = false;
             App.setRoot("crearFoto2");
         }
         

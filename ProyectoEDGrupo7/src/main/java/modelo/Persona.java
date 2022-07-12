@@ -10,6 +10,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
@@ -29,6 +30,15 @@ public class Persona implements Serializable{
 
     public String getNombreCompleto() {
         return nombreCompleto;
+    }
+    
+    public void eliminarFotoAparicion(Foto f){
+        for (Iterator<Foto> iterator = listaFotosAparicion.iterator(); iterator.hasNext();) {
+        Foto foto = iterator.next();
+            if(foto.equals(f)) {
+                iterator.remove();
+            }
+        }
     }
     
     //Constructor

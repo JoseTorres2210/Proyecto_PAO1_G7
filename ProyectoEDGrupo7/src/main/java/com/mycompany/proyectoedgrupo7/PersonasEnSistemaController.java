@@ -7,11 +7,16 @@ package com.mycompany.proyectoedgrupo7;
  */
 
 
+import TDAs.CircularDoublyLinkedList;
+import TDAs.LinkedList;
 import com.mycompany.proyectoedgrupo7.App;
 import static com.mycompany.proyectoedgrupo7.CrearFoto2Controller.fotoOG;
+import static com.mycompany.proyectoedgrupo7.VisualizarFotosEnAlbumController.albumOG;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Iterator;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.Set;
@@ -31,6 +36,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.util.Callback;
+import modelo.Album;
+import modelo.Foto;
 import modelo.Persona;
 
 /**
@@ -137,6 +144,7 @@ public class PersonasEnSistemaController implements Initializable {
             fxmlLoader.setController(ct);//se asigna el controlador
             ct.llenarCampos(p); 
             App.changeRoot(root);
+            editarPersona(p,Album.leerArchivoAlbumes(App.pathAlbumes));
             tvPersonasRegistradas.refresh();
             
         }catch (IOException ex) {
@@ -169,10 +177,11 @@ public class PersonasEnSistemaController implements Initializable {
             //Se elimina el objeto del conjunto
             Set<Persona> personas = Persona.leerArchivoPersonas(App.pathPersonas);
             personas.remove(p); //Se elimina la ocurrencia del conjunto
-
+            eliminarPersona(p,Album.leerArchivoAlbumes(App.pathAlbumes));
             
             //Se actualiza el archivo
             Persona.actualizarListaPersonas(personas, App.pathPersonas);
+            
             App.setRoot("personasEnSistema");
 
         }else{
@@ -186,4 +195,49 @@ public class PersonasEnSistemaController implements Initializable {
         }
     }
     
+    public void editarPersona(Persona p, LinkedList<Album> albumes){
+        Comparator<Persona> cmp1 = (Persona p1,Persona p2) -> p1.getNombre().toLowerCase()
+               .compareTo(p2.getNombre().toLowerCase());
+        Comparator<Persona> cmp2 = (Persona p1,Persona p2) -> p1.getApellido().toLowerCase()
+                .compareTo(p2.getApellido().toLowerCase());
+            for(Album album:albumes ){
+                CircularDoublyLinkedList<Foto> fotos=album.getFotos();
+                    for(int i=0;i<fotos.size();i++){
+                        Set<Persona> personas=fotos.get(i).getPersonas();
+                        for(Persona persona : personas){
+                            if(cmp1.compare(p, persona)==0 && cmp2.compare(p, persona)==0){
+                                persona.setNombre(p.getNombre());
+                                persona.setApellido(p.getApellido());
+                                persona.setNombreCompleto(p.getNombreCompleto());                           
+                            }
+                        }
+                    }
+
+            }
+            
+        
+    }
+    
+        public void eliminarPersona(Persona p, LinkedList<Album> albumes){
+        Comparator<Persona> cmp1 = (Persona p1,Persona p2) -> p1.getNombre().toLowerCase()
+               .compareTo(p2.getNombre().toLowerCase());
+        Comparator<Persona> cmp2 = (Persona p1,Persona p2) -> p1.getApellido().toLowerCase()
+                .compareTo(p2.getApellido().toLowerCase());
+            for(Album album:albumes ){
+                CircularDoublyLinkedList<Foto> fotos=album.getFotos();
+                    for(int i=0;i<fotos.size();i++){
+                        Set<Persona> personas=fotos.get(i).getPersonas();
+                        for(Iterator<Persona> j = personas.iterator(); j.hasNext();){
+                            Persona persona=j.next();
+                            if(cmp1.compare(p, persona)==0 && cmp2.compare(p, persona)==0){
+                               persona.eliminarFotoAparicion(fotos.get(i));
+                               j.remove();
+                            }
+                            persona.actualizarListaPersonas(personas, App.pathPersonas);
+                        }
+                    }
+                    Album.actualizarAlbum(album, App.pathAlbumes);
+            }    
+    }
+        
 }

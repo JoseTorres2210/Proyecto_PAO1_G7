@@ -33,6 +33,8 @@ public class FiltrarFotosController implements Initializable{
     @FXML
     private TextField txtPersona;
     @FXML
+    private TextField txtPalabrasClave;
+    @FXML
     private DatePicker fechaDesde;
     @FXML
     private DatePicker fechaHasta;
@@ -42,6 +44,9 @@ public class FiltrarFotosController implements Initializable{
     private CheckBox filtrarLugar;
     @FXML
     private CheckBox filtrarFecha;
+    @FXML
+    private CheckBox filtrarPalabrasClave;
+
     private CircularDoublyLinkedList<Foto> listaFotosFiltradas;
     public void initialize(URL url, ResourceBundle rb) {
 
@@ -49,6 +54,7 @@ public class FiltrarFotosController implements Initializable{
         fechaHasta.setVisible(false);
         txtPersona.setVisible(false);
         txtLugar.setVisible(false);
+        txtPalabrasClave.setVisible(false);
         listaFotosFiltradas = new CircularDoublyLinkedList<>();
 //        CheckComboBox cb = new CheckComboBox();
         Alert info = new Alert(Alert.AlertType.INFORMATION);
@@ -136,6 +142,15 @@ public class FiltrarFotosController implements Initializable{
 
     }
     
+    @FXML
+    private void unlockPalClave(){
+        if(filtrarPalabrasClave.isSelected()){
+            txtPalabrasClave.setVisible(true);
+        }else{
+            txtPalabrasClave.setVisible(false);
+        }
+
+    }
     
     private static CircularDoublyLinkedList<Foto> filtrarPersonaFoto(CircularDoublyLinkedList<Foto> fotos,String nombre,String apellido){
         Comparator<Persona> cmp1 = (Persona p1,Persona p2) -> p1.getNombre().toLowerCase()

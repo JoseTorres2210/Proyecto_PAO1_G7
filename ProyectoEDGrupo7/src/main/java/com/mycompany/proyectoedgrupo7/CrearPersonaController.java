@@ -142,6 +142,7 @@ public class CrearPersonaController implements Initializable {
             exito.setTitle("Exito");
             exito.setHeaderText("Operacion exitosa");
             exito.show();
+            System.out.println("LISTA EN LOS ARCHIVOS>>>>"+Persona.leerArchivoPersonas(App.pathPersonas));
             App.setRoot("personasEnSistema");
             
             

@@ -49,14 +49,17 @@ public class PersonasEnSistemaController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
         tcNombre.setCellValueFactory(new PropertyValueFactory<>("nombreCompleto"));
         ObservableList<Persona> l = FXCollections.observableArrayList();
+        System.out.println("%%%%%"+Persona.leerArchivoPersonas(App.pathPersonas));
+        System.out.println("-----------------");
         for(Persona p :Persona.leerArchivoPersonas(App.pathPersonas)){
-            System.out.println(p.getNombreCompleto());
-            l.add(p);
             System.out.println(p);
+            l.add(p);
+            
         }
-
+        System.out.println("Observable list: "+l);
         tvPersonasRegistradas.getItems().addAll(l);
         agregarOpciones();
     }    

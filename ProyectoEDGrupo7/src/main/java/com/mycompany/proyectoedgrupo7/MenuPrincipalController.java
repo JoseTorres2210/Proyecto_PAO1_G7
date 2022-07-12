@@ -5,6 +5,8 @@
  */
 package com.mycompany.proyectoedgrupo7;
 
+import TDAs.CircularDoublyLinkedList;
+import TDAs.CircularNode;
 import TDAs.LinkedList;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -18,6 +20,7 @@ import javafx.scene.image.Image;
 
 import javafx.scene.image.ImageView;
 import modelo.Album;
+import modelo.Foto;
 import modelo.Persona;
 
 public class MenuPrincipalController implements Initializable {
@@ -25,47 +28,19 @@ public class MenuPrincipalController implements Initializable {
 
     @FXML
     private ImageView imgviewFotoMenuPrincipal;
+    private CircularDoublyLinkedList<String> carreteMuestra = Foto.generarCarreteMuestra();
+    private  CircularNode<String> nodo = carreteMuestra.first;
+    private String fotoActual = nodo.getContent();
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {        
         try{
-
-            //Tener una CircularLinkedList para simular la repeticion de las imagenes
-            
-            String filename = "archivos/imagenesMainMenu/dogo.jpg"; //<---- PROVISIONAL, se debe cambiar por hilos
-            Image image = new Image(new FileInputStream(filename));
-            imgviewFotoMenuPrincipal.setImage(image);
-        }catch (FileNotFoundException ex) {
-            /*
-            try{
-                System.out.println("no se encuentra archivo de imagen: ");
-                //Hacemos un split por el punto para transformar de jpg a png o visceversa
-                
-                String[] datos = m.getFoto().split(".");
-                System.out.println(m.getFoto());
-                if(datos[1].equals("jpg")){
-                    System.out.println("SE CAMBIA A .JPG");
-                    String fileName = "archivos/ImagenesMascotas"+datos[0]+".jpg";
-                    System.out.println(fileName);
-                    Image image = new Image(new FileInputStream(fileName));
-                    ImagenMascota.setImage(image);
-                }else if(datos[1].equals("png")){
-                    System.out.println("SE CAMBIA A .PNG");
-                    String fileName = "archivos/ImagenesMascotas"+datos[0]+".png";
-                    System.out.println(fileName);
-                    Image image = new Image(new FileInputStream(fileName));
-                    ImagenMascota.setImage(image);
-                }
-            }catch(IOException e){
-                System.out.println("ERROR: ");
-            }
-            */
-            
-            
-            
-            ex.printStackTrace();
+            ImageChanger imc = new ImageChanger();
+            imc.setName("pics");
+            imc.setDaemon(true);
+            imc.start(); 
         }catch(IllegalArgumentException e){
             e.printStackTrace();
         }
@@ -89,6 +64,40 @@ public class MenuPrincipalController implements Initializable {
     @FXML
     private void switchToPersonasEnSistema(ActionEvent event) throws IOException{
         App.setRoot("personasEnSistema");
+    }
+    
+    
+    
+    //Clase interna para mostrar imagenes con hilos
+    private class ImageChanger extends Thread{    
+        @Override
+        public void run(){
+            //Iteramos la lista circular
+            while(true){
+                //Se hara una iteracion indefinida
+                try{            
+                    String filename = "archivos/imagenesMainMenu/"+nodo.getContent();
+                    Image image = new Image(new FileInputStream(filename));
+                    imgviewFotoMenuPrincipal.setImage(image);
+                    try{
+                        Thread.sleep(4000);
+                    }catch(InterruptedException e){
+                        System.out.println(e);
+                    }                      
+                }catch (FileNotFoundException ex) { 
+                    ex.printStackTrace();
+                }catch(IllegalArgumentException e){
+                    e.printStackTrace();
+                }
+                
+                
+                
+                
+                nodo = nodo.getNext();
+            }
+            
+        }
+        
     }
 
 }

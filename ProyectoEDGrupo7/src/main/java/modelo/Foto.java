@@ -1,5 +1,6 @@
 package modelo;
 import TDAs.ArrayList;
+import TDAs.CircularDoublyLinkedList;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Date;
@@ -7,6 +8,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Foto implements Serializable{
+    private static final long serialVersionUID = 4884631801407000316L;
     private Set<Persona> personas;
     private LocalDate fecha;
     private String lugar;
@@ -133,6 +135,32 @@ public class Foto implements Serializable{
     @Override
     public String toString() {
         return "Foto{" + "fecha=" + fecha + ", lugar=" + lugar + ", descripcion=" + descripcion + ", nomAlbum=" + nomAlbum + ", imagen=" + imagen + ", persona=" + personas + '}';
+    }
+    
+    
+    public static CircularDoublyLinkedList<String> generarCarreteMuestra(){
+        CircularDoublyLinkedList<String> carreteMuestra = new CircularDoublyLinkedList<>();
+        carreteMuestra.addLast("paisaje1.jpg");
+        carreteMuestra.addLast("paisaje2.jpg");
+        carreteMuestra.addLast("paisaje3.jpg");
+        carreteMuestra.addLast("paisaje4.jfif");
+        carreteMuestra.addLast("paisaje5.jpg");
+        carreteMuestra.addLast("paisaje6.jpg");
+        carreteMuestra.addLast("paisaje7.jpg");
+        carreteMuestra.addLast("paisaje8.jpg");
+        carreteMuestra.addLast("paisaje9.jpg");
+        carreteMuestra.addLast("paisaje10.jpg");
+        carreteMuestra.addLast("paisaje11.jpg");
+        carreteMuestra.addLast("paisaje12.jpg");
+        carreteMuestra.addLast("paisaje13.jpg");
+        carreteMuestra.addLast("paisaje14.jpg");
+        carreteMuestra.addLast("paisaje15.jpg");
+        carreteMuestra.addLast("paisaje16.jpg");
+        carreteMuestra.addLast("paisaje17.jpg");
+        carreteMuestra.addLast("paisaje18.jfif");
+        carreteMuestra.addLast("paisaje19.jpg");
+        carreteMuestra.addLast("paisaje20.jpg");
+        return carreteMuestra;
     }
     
     

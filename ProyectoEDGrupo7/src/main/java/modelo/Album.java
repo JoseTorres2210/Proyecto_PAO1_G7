@@ -14,7 +14,7 @@ import java.io.Serializable;
 
 
 public class Album implements Serializable,Comparable<Album>{
-    
+    public static CircularDoublyLinkedList<Foto> carreteCompleto = new CircularDoublyLinkedList<>();
     private static final long serialVersionUID = 8645648745972565030L;
     private String nombre;
     private String descripcion;
@@ -79,6 +79,7 @@ public class Album implements Serializable,Comparable<Album>{
     
     //Metodo para agregar una foto al album
     public boolean agregarFoto(Foto foto){
+        carreteCompleto.addLast(foto);
         return this.fotos.addLast(foto);
     }
     
@@ -230,6 +231,12 @@ public class Album implements Serializable,Comparable<Album>{
                 break;
             }
             
+        }
+        for(int i = 0;i<carreteCompleto.size();i++){
+            if(carreteCompleto.get(i).equals(foto)){
+                carreteCompleto.remove(i);
+                break;
+            }
         }
     }
     

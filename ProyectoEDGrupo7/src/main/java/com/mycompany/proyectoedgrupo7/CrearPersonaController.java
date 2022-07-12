@@ -36,6 +36,7 @@ public class CrearPersonaController implements Initializable {
     private TextField txtNombre;
     @FXML
     private TextField txtApellido;
+    public static boolean creacionPersonaEnArchivoNuevo = false;
     /**
      * Initializes the controller class.
      */
@@ -64,7 +65,12 @@ public class CrearPersonaController implements Initializable {
             exito.setTitle("Exito");
             exito.setHeaderText("Operacion exitosa");
             exito.show();
-            App.setRoot("crearFoto2");
+            
+            if(creacionPersonaEnArchivoNuevo){
+                App.setRoot("personasEnSistema");
+            }else{
+                App.setRoot("crearFoto2");
+            }
             
         }catch(EmptyFieldsException e){
             Alert alerta = new Alert(Alert.AlertType.ERROR,"Asegúrese de llenar todos los campos"); //FIXME
@@ -88,7 +94,14 @@ public class CrearPersonaController implements Initializable {
     @FXML
     private void switchToCrearFoto2(ActionEvent event) throws IOException {
         //Se retorna a la parte anterior
-        App.setRoot("crearFoto2");
+        
+        if(creacionPersonaEnArchivoNuevo){
+            App.setRoot("personasEnSistema");
+        }else{
+            App.setRoot("crearFoto2");
+        }
+        
+      
     }
 
 }

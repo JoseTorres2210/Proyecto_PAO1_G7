@@ -228,6 +228,7 @@ public class CrearFoto2Controller implements Initializable {
         tvPersonasEnSistema.setVisible(false);
         vboxPersonas.getChildren().clear();
         vboxPersonas.getChildren().add(personasEnFoto);
+        
         buttonCancelar.setVisible(false);
         buttonCrearFoto.setVisible(false);
         buttonAgregarNuevaPersona.setText("Regresar");

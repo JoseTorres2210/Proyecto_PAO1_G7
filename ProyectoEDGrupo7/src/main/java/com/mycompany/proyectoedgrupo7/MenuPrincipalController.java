@@ -29,20 +29,7 @@ public class MenuPrincipalController implements Initializable {
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        System.out.println(Album.leerArchivoAlbumes(App.pathAlbumes));
-        LinkedList<Integer> l1 = new LinkedList<>();
-        for(int i =0;i<=10;i++){
-            l1.addLast(i);
-        }
-        System.out.println("LISTA---->: "+l1);
-        l1.remove(l1.size()-1);
-        System.out.println("REMOVIENDO EL ULTIMO ELEMENTO---->: "+l1);
-        System.out.println("AGREGANDO DESPUES DE REMOVER");
-        l1.add(l1.size(), 15555);
-        System.out.println(l1);
-        
-        
+    public void initialize(URL url, ResourceBundle rb) {        
         try{
 
             //Tener una CircularLinkedList para simular la repeticion de las imagenes
@@ -97,6 +84,11 @@ public class MenuPrincipalController implements Initializable {
     @FXML
     private void switchToCrearNuevoAlbum(ActionEvent event) throws IOException {
         App.setRoot("crearAlbum");
+    }
+
+    @FXML
+    private void switchToPersonasEnSistema(ActionEvent event) throws IOException{
+        App.setRoot("personasEnSistema");
     }
 
 }

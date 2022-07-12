@@ -9,7 +9,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="bodybg" stylesheets="@backgrounds/backgroundMainMenu.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.proyectoedgrupo7.MenuPrincipalController">
    <top>
       <VBox alignment="CENTER" BorderPane.alignment="CENTER">
@@ -41,7 +40,11 @@
                         <Insets right="20.0" />
                      </HBox.margin>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#switchToCrearNuevoAlbum" text="Crear nuevo álbum" />
+                  <Button mnemonicParsing="false" onAction="#switchToCrearNuevoAlbum" text="Crear nuevo álbum">
+                     <HBox.margin>
+                        <Insets right="20.0" />
+                     </HBox.margin></Button>
+                  <Button mnemonicParsing="false" onAction="#switchToPersonasEnSistema" text="Personas Registradas" />
                </children>
             </HBox>
          </children>

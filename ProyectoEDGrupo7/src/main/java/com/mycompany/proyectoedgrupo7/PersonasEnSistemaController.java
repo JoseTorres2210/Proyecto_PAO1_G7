@@ -98,14 +98,13 @@ public class PersonasEnSistemaController implements Initializable {
                             
                             btnEliminar.setOnAction(e ->{
                                 System.out.println("Se elimina a la persona "+ persona +" de los registros");
-
-                                
-                                
+                                eliminarPersona(persona);
                             });
                             
                             btnEditar.setOnAction(e -> {
                                 //Pasamos a la ventana de creacion de persona con los campos cargados
                                 System.out.println("SE EDITA A ESA PERSONA");
+                                editarPersona(persona);
                             });
            
                             
@@ -135,12 +134,7 @@ public class PersonasEnSistemaController implements Initializable {
             Parent root = (Parent) fxmlLoader.load();
             CrearPersonaController ct = fxmlLoader.getController();
             fxmlLoader.setController(ct);//se asigna el controlador
-            
-
-            
-            
-//            ct.llenarCombo(Ciudad.cargarCiudades("archivos/ciudades.csv"));
-//            ct.llenarCampos(c); 
+            ct.llenarCampos(p); 
             App.changeRoot(root);
             
         }catch (IOException ex) {
@@ -150,6 +144,15 @@ public class PersonasEnSistemaController implements Initializable {
         }catch(Exception e){
             System.out.println("Excepcion general: "+e);
         }   
+    }
+    
+    
+    private void eliminarPersona(Persona p){
+        /*
+        #################################################
+        Logica para la eliminacion de la persona de los registros
+        #################################################
+        */
     }
     
 }

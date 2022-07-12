@@ -178,9 +178,10 @@ public class Persona implements Serializable{
         }
     }
     
-    public static void actualizarListaPersonas(LinkedList<Persona> listaPersonas, String path){
+    public static void actualizarListaPersonas(Set<Persona> listaPersonas, String path){
         try(ObjectOutputStream escritor = new ObjectOutputStream(new FileOutputStream(path))){
            //Escribimos la nueva lista actualizada en el archivo serializado
+            System.out.println("A ESCRIBIR: >>>"+listaPersonas);
            escritor.writeObject(listaPersonas);
         }catch(IOException e){
             System.out.println("Error al escribir: "+e);

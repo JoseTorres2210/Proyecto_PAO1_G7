@@ -9,7 +9,9 @@ import TDAs.LinkedList;
 import exceptions.EmptyFieldsException;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Iterator;
 import java.util.ResourceBundle;
+import java.util.Set;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -40,6 +42,7 @@ public class CrearPersonaController implements Initializable {
     public static boolean creacionPersonaEnArchivoNuevo = false;
     @FXML
     private Button buttonActualizar;
+    private Persona personaActualizar;
     /**
      * Initializes the controller class.
      */
@@ -115,10 +118,54 @@ public class CrearPersonaController implements Initializable {
 
     @FXML
     private void actualizarPersona(ActionEvent event) {
-//        LinkedList<Persona> listaPersonas = Persona.
+        creacionPersonaEnArchivoNuevo = true;
+        //Obtenemos el conjunto de personas
+        try{
+            Set<Persona> listaPersonas = Persona.leerArchivoPersonas(App.pathPersonas);
+
+            for(Persona p : listaPersonas){
+                //#####################OJO CON ESTA LINEA
+                if(p.getId().equals(personaActualizar.getId())){
+                    //Removemos a la persona
+                    p.setNombre(txtNombre.getText());
+                    p.setApellido(txtApellido.getText());
+                    if(p.getNombre().equals("")||p.getApellido().equals("")){
+                        throw  new EmptyFieldsException();
+                    }
+                }
+            }
+            System.out.println("Lista actualizada>>>"+listaPersonas);
+            //Se actualiza el archivo
+            Persona.actualizarListaPersonas(listaPersonas, App.pathPersonas); 
+            //Se muestra aviso de exito
+            Alert exito = new Alert(Alert.AlertType.INFORMATION, "La persona ha sido actualizada en el sistema de manera exitosa");
+            exito.setTitle("Exito");
+            exito.setHeaderText("Operacion exitosa");
+            exito.show();
+            App.setRoot("personasEnSistema");
+            
+            
+        }catch(EmptyFieldsException e){
+            Alert alerta = new Alert(Alert.AlertType.ERROR,"Asegúrese de llenar todos los campos"); //FIXME
+            alerta.setTitle("Error");
+            alerta.setHeaderText("Ha ocurrido un error:");
+            alerta.show(); 
+        }catch(NullPointerException e){
+            Alert alerta = new Alert(Alert.AlertType.ERROR,"Asegúrese de llenar todos los campos"); //FIXME
+            alerta.setTitle("Error");
+            alerta.setHeaderText("Ha ocurrido un error:");
+            System.out.println(e.getClass());
+            alerta.show();  
+        }catch(Exception e){
+            System.out.println("EXCEPCION GENERAL INESPERADA");
+        }
+
+        
+        
     }
     
     public void llenarCampos(Persona p){
+        creacionPersonaEnArchivoNuevo = true;
         //Se vuelve el boton para crear persona invisible
         buttonFinalizarCreacionPersona.setVisible(false);
         
@@ -128,6 +175,7 @@ public class CrearPersonaController implements Initializable {
         //Se llenan los campos con respecto a la persona
         txtNombre.setText(p.getNombre());
         txtApellido.setText(p.getApellido());
+        personaActualizar = p;
     }
 
 }

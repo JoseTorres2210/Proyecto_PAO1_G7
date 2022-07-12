@@ -181,7 +181,7 @@ public class FiltrarFotosController implements Initializable{
         CircularDoublyLinkedList<Foto> resultado=new CircularDoublyLinkedList<Foto>();
         Comparator<Foto> cmp = (Foto foto1,Foto foto2) -> foto1.getLugar()
                 .compareTo(foto2.getLugar());
-        resultado=fotos.findSame(cmp,tmp);
+            resultado=fotos.findSame(cmp,tmp);
         
         return resultado;
     
@@ -201,28 +201,28 @@ public class FiltrarFotosController implements Initializable{
     public static CircularDoublyLinkedList<Foto> filtrarFechaFoto(CircularDoublyLinkedList<Foto> fotos,DatePicker fechaInicio,DatePicker fechaFin){
         Comparator<Foto> cmp = (Foto foto1,Foto foto2) -> foto1.getFecha()
                 .compareTo(foto2.getFecha());
-        if(fechaInicio==null && fechaFin==null){                   
-            return null;
-        }
-        else if(fechaInicio==null){     
-            LocalDate d2= fechaFin.getValue();
-            Foto f2=new Foto(d2,null,null);
-            CircularDoublyLinkedList<Foto> resultado=fotos.findSmall(cmp,f2);
-            return resultado;
-    
-        }
-        else if(fechaFin==null){
-            LocalDate d1=fechaInicio.getValue();
-            Foto f1=new Foto(d1,null,null);
-            CircularDoublyLinkedList<Foto> resultado=fotos.findBig(cmp,f1);
-            return resultado;
-        }
+//        if(fechaInicio==null && fechaFin==null){                   
+//            return null;
+//        }
+//        else if(fechaInicio==null){     
+//            LocalDate d2= fechaFin.getValue();
+//            Foto f2=new Foto(d2,null,null);
+//            CircularDoublyLinkedList<Foto> resultado=fotos.findSmall(cmp,f2);
+//            return resultado;
+//    
+//        }
+//        else if(fechaFin==null){
+//            LocalDate d1=fechaInicio.getValue();
+//            Foto f1=new Foto(d1,null,null);
+//            CircularDoublyLinkedList<Foto> resultado=fotos.findBig(cmp,f1);
+//            return resultado;
+//        }
           LocalDate d1=fechaInicio.getValue();
           LocalDate d2= fechaFin.getValue();
           Foto f1=new Foto(d1,null,null);
           Foto f2=new Foto(d2,null,null);
-          CircularDoublyLinkedList<Foto> resultado=fotos.findBig(cmp,f1);
-          resultado=fotos.findSmall(cmp,f2);  
+          CircularDoublyLinkedList<Foto> resultado=fotos.findSmall(cmp,f1);
+          resultado=resultado.findBig(cmp,f2);  
            return resultado;
     }
     

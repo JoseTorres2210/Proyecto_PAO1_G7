@@ -24,7 +24,7 @@ public class PantallaInicioController implements Initializable {
         // TODO
         //Album.crearArchivoAlbumes(App.pathAlbumes);
         Persona.crearArchivoPersonas(App.pathPersonas);
-        
+        System.out.println(Persona.leerArchivoPersonas(App.pathPersonas));
     }    
     
     @FXML

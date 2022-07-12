@@ -110,7 +110,7 @@ public class Foto implements Serializable{
     
     
     public boolean eliminarPersonaDeFoto(Persona persona){
-        boolean retorno = false;
+
         
 //        //Debemos eliminar a esa persona a una foto SOLO SI ESTA NO SE ENCUENTRA EN LA LISTA PREVIAMENTE
 //        for(Persona p : personas){

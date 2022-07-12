@@ -128,7 +128,11 @@ public class CrearPersonaController implements Initializable {
                 if(p.getId().equals(personaActualizar.getId())){
                     //Removemos a la persona
                     p.setNombre(txtNombre.getText());
+                    
                     p.setApellido(txtApellido.getText());
+                    p.setNombreCompleto(txtNombre.getText()+" "+txtApellido.getText());
+                    
+                    
                     if(p.getNombre().equals("")||p.getApellido().equals("")){
                         throw  new EmptyFieldsException();
                     }
@@ -166,6 +170,7 @@ public class CrearPersonaController implements Initializable {
     }
     
     public void llenarCampos(Persona p){
+        lblCrearNuevaPersona.setText("Editar datos de persona");
         creacionPersonaEnArchivoNuevo = true;
         //Se vuelve el boton para crear persona invisible
         buttonFinalizarCreacionPersona.setVisible(false);

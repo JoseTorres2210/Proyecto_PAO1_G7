@@ -111,6 +111,10 @@ public class Persona implements Serializable{
     public void setApellido(String apellido) {
         this.apellido = apellido;
     }
+    
+    public void setNombreCompleto(String nombreCompleto){
+        this.nombreCompleto = nombreCompleto;
+    }
 
     @Override
     public String toString() {

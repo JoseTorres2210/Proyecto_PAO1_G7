@@ -49,19 +49,13 @@ public class PersonasEnSistemaController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+
         tcNombre.setCellValueFactory(new PropertyValueFactory<>("nombreCompleto"));
-        ObservableList<Persona> l = FXCollections.observableArrayList();
-        System.out.println("%%%%%"+Persona.leerArchivoPersonas(App.pathPersonas));
-        System.out.println("-----------------");
-        for(Persona p :Persona.leerArchivoPersonas(App.pathPersonas)){
-            System.out.println(p);
-            l.add(p);
-            
-        }
-        System.out.println("Observable list: "+l);
-        tvPersonasRegistradas.getItems().addAll(l);
+       
+        tvPersonasRegistradas.getItems().setAll(Persona.leerArchivoPersonas(App.pathPersonas));
+
         agregarOpciones();
+
     }    
 
     @FXML
@@ -133,12 +127,12 @@ public class PersonasEnSistemaController implements Initializable {
     private void editarPersona(Persona p){
         try{
             FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("crearPersona.fxml"));//no tiene el controlador especificado
-            //CrearCiudadController ct = new CrearCiudadController(); //Recien aqui se esta creando el controlador
             Parent root = (Parent) fxmlLoader.load();
             CrearPersonaController ct = fxmlLoader.getController();
             fxmlLoader.setController(ct);//se asigna el controlador
             ct.llenarCampos(p); 
             App.changeRoot(root);
+            tvPersonasRegistradas.refresh();
             
         }catch (IOException ex) {
             System.out.println("Error fatal: "+ex);

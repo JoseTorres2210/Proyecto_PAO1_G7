@@ -41,6 +41,10 @@ public class VisualizarFotosEnAlbumController implements Initializable {
     private Button buttonEditarPersonasFoto;
     @FXML
     private ImageView imgvFotos;
+    @FXML
+    private Label lblLugar;
+    @FXML
+    private Label lblFecha;
     
     public static Album albumOG;
     
@@ -58,6 +62,8 @@ public class VisualizarFotosEnAlbumController implements Initializable {
         if(albumOG!=null)
             lblNombreAlbumFotos.setText(albumOG.getNombre());
         llenarImageView(fotoActual);
+        lblLugar.setText(fotoActual.getLugar());
+        lblFecha.setText(fotoActual.getFecha().toString());
         CircularNode<Foto> nodo = albumOG.getFotos().getCurrentNode();
         //fotoActual = nodo.getContent();
         System.out.println("----->"+fotoActual);
@@ -73,6 +79,8 @@ public class VisualizarFotosEnAlbumController implements Initializable {
         nodo = nodo.getPrevious();
         fotoActual = nodo.getContent();
         llenarImageView(fotoActual);
+        lblLugar.setText(fotoActual.getLugar());
+        lblFecha.setText(fotoActual.getFecha().toString());
         System.out.println(fotoActual);
         if(fotoActual.getPersonas().isEmpty()){
             buttonEditarPersonasFoto.setDisable(true);
@@ -126,6 +134,8 @@ public class VisualizarFotosEnAlbumController implements Initializable {
         System.out.println(fotoActual);
         System.out.println("******" +fotos);
         llenarImageView(fotoActual);
+        lblLugar.setText(fotoActual.getLugar());
+        lblFecha.setText(fotoActual.getFecha().toString());
         if(fotoActual.getPersonas().isEmpty()){
             buttonEditarPersonasFoto.setDisable(true);
         }else{

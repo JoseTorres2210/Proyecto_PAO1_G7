@@ -6,6 +6,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.proyectoedgrupo7.VisualizarFotosEnAlbumController">
@@ -30,23 +31,6 @@
          </BorderPane.margin>
       </Button>
    </left>
-   <bottom>
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <children>
-            <Button mnemonicParsing="false" onAction="#switchToVisualizarAlbumes" text="Volver a mis álbumes">
-               <HBox.margin>
-                  <Insets right="20.0" />
-               </HBox.margin>
-            </Button>
-            <Button mnemonicParsing="false" onAction="#eliminarFotoActual" text="Eliminar Foto">
-               <HBox.margin>
-                  <Insets right="20.0" />
-               </HBox.margin>
-            </Button>
-            <Button fx:id="buttonEditarPersonasFoto" mnemonicParsing="false" onAction="#editarPersonasEnFoto" text="¿Quién aparece en esta foto?" />
-         </children>
-      </HBox>
-   </bottom>
    <center>
       <HBox alignment="CENTER" prefHeight="231.0" prefWidth="325.0" BorderPane.alignment="CENTER">
          <children>
@@ -54,4 +38,35 @@
          </children>
       </HBox>
    </center>
+   <bottom>
+      <VBox prefHeight="90.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="lblFecha" text="Label">
+               <VBox.margin>
+                  <Insets left="150.0" />
+               </VBox.margin>
+            </Label>
+            <Label fx:id="lblLugar" text="Label">
+               <VBox.margin>
+                  <Insets left="150.0" top="5.0" />
+               </VBox.margin>
+            </Label>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#switchToVisualizarAlbumes" text="Volver a mis álbumes">
+                     <HBox.margin>
+                        <Insets right="20.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#eliminarFotoActual" text="Eliminar Foto">
+                     <HBox.margin>
+                        <Insets right="20.0" />
+                     </HBox.margin>
+                  </Button>
+                  <Button fx:id="buttonEditarPersonasFoto" mnemonicParsing="false" onAction="#editarPersonasEnFoto" text="¿Quién aparece en esta foto?" />
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </bottom>
 </BorderPane>

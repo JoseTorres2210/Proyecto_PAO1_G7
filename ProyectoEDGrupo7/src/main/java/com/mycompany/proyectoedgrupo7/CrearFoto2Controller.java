@@ -18,6 +18,7 @@ import javafx.scene.control.Alert;
 
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -25,6 +26,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 import modelo.Album;
 import modelo.Foto;
@@ -62,6 +64,8 @@ public class CrearFoto2Controller implements Initializable {
     public static Foto fotoOG;
     public static Foto fotoOG2;
     private boolean edicion = false;
+    @FXML
+    private VBox vboxPersonas;
     /**
      * Initializes the controller class.
      */
@@ -204,9 +208,12 @@ public class CrearFoto2Controller implements Initializable {
     
     
     public void llenarCampos(Foto f){
+        ListView<Persona> personasEnFoto = new ListView<>();
+
+        personasEnFoto.getItems().addAll(f.getPersonas());
         
         edicion = true;
-        buttonCancelar.setOnAction(e ->{
+        buttonAgregarNuevaPersona.setOnAction(e ->{
             try {
                 App.setRoot("visualizarFotosEnAlbum");
             } catch (IOException ex) {
@@ -218,17 +225,13 @@ public class CrearFoto2Controller implements Initializable {
         lblCrearFoto.setText("Personas en esta foto: ");
         rbNoHayPersonas.setVisible(false);
         rbSiHayPersonas.setVisible(false);
-        tvPersonasEnSistema.setVisible(true);
-        tcPersonas.setCellValueFactory(new PropertyValueFactory<>("nombreCompleto"));
-        ObservableList<Persona> l = FXCollections.observableArrayList();
-         for(Persona p :f.getPersonas()){
-             System.out.println(p.getNombreCompleto());
-             l.add(p);
-             System.out.println(p);
-         }
-         System.out.println(l);
-         tvPersonasEnSistema.getItems().addAll(l);
-         //agregarOpciones();
+        tvPersonasEnSistema.setVisible(false);
+        vboxPersonas.getChildren().clear();
+        vboxPersonas.getChildren().add(personasEnFoto);
+        buttonCancelar.setVisible(false);
+        buttonCrearFoto.setVisible(false);
+        buttonAgregarNuevaPersona.setText("Regresar");
+
          
     }
 

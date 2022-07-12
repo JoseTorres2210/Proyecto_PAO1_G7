@@ -11,7 +11,6 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.proyectoedgrupo7.CrearPersonaController">
    <top>
       <Label fx:id="lblCrearNuevaPersona" text="Crear una nueva persona" BorderPane.alignment="CENTER">
@@ -69,6 +68,7 @@
    <bottom>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
+            <Button fx:id="buttonActualizar" mnemonicParsing="false" onAction="#actualizarPersona" text="Actualizar persona" />
             <Button fx:id="buttonFinalizarCreacionPersona" mnemonicParsing="false" onAction="#crearPersona" text="Crear persona">
                <HBox.margin>
                   <Insets right="20.0" />

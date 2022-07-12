@@ -5,6 +5,7 @@
  */
 package com.mycompany.proyectoedgrupo7;
 
+import TDAs.LinkedList;
 import exceptions.EmptyFieldsException;
 import java.io.IOException;
 import java.net.URL;
@@ -37,12 +38,15 @@ public class CrearPersonaController implements Initializable {
     @FXML
     private TextField txtApellido;
     public static boolean creacionPersonaEnArchivoNuevo = false;
+    @FXML
+    private Button buttonActualizar;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        buttonActualizar.setVisible(false);
     }    
     
     @FXML
@@ -107,6 +111,23 @@ public class CrearPersonaController implements Initializable {
         }
         
       
+    }
+
+    @FXML
+    private void actualizarPersona(ActionEvent event) {
+//        LinkedList<Persona> listaPersonas = Persona.
+    }
+    
+    public void llenarCampos(Persona p){
+        //Se vuelve el boton para crear persona invisible
+        buttonFinalizarCreacionPersona.setVisible(false);
+        
+        //Se vuelve visible el boton de actualizacion
+        buttonActualizar.setVisible(true);
+        
+        //Se llenan los campos con respecto a la persona
+        txtNombre.setText(p.getNombre());
+        txtApellido.setText(p.getApellido());
     }
 
 }

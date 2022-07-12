@@ -178,7 +178,7 @@ public class Persona implements Serializable{
         }
     }
     
-        public static void actualizarListaPersonas(LinkedList<Persona> listaPersonas, String path){
+    public static void actualizarListaPersonas(LinkedList<Persona> listaPersonas, String path){
         try(ObjectOutputStream escritor = new ObjectOutputStream(new FileOutputStream(path))){
            //Escribimos la nueva lista actualizada en el archivo serializado
            escritor.writeObject(listaPersonas);

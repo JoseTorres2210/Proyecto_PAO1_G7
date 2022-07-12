@@ -16,7 +16,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -121,6 +123,33 @@ public class PersonasEnSistemaController implements Initializable {
         };
 
         tcOpciones.setCellFactory(cellFactory);
+    }
+    
+    
+    
+    //Metodo para editar a las personas en el sistema
+    private void editarPersona(Persona p){
+        try{
+            FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("crearPersona.fxml"));//no tiene el controlador especificado
+            //CrearCiudadController ct = new CrearCiudadController(); //Recien aqui se esta creando el controlador
+            Parent root = (Parent) fxmlLoader.load();
+            CrearPersonaController ct = fxmlLoader.getController();
+            fxmlLoader.setController(ct);//se asigna el controlador
+            
+
+            
+            
+//            ct.llenarCombo(Ciudad.cargarCiudades("archivos/ciudades.csv"));
+//            ct.llenarCampos(c); 
+            App.changeRoot(root);
+            
+        }catch (IOException ex) {
+            System.out.println("Error fatal: "+ex);
+            
+            
+        }catch(Exception e){
+            System.out.println("Excepcion general: "+e);
+        }   
     }
     
 }

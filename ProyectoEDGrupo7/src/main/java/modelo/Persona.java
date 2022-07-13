@@ -213,7 +213,11 @@ public class Persona implements Serializable{
         hash = 53 * hash + Objects.hashCode(this.apellido);
         return hash;
     }
-        
+
+    public void setId(String id) {
+        this.id=id;
+    }
+  
     
         
         

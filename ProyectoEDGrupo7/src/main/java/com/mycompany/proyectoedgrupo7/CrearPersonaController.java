@@ -5,10 +5,12 @@
  */
 package com.mycompany.proyectoedgrupo7;
 
+import TDAs.CircularDoublyLinkedList;
 import TDAs.LinkedList;
 import exceptions.EmptyFieldsException;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.ResourceBundle;
 import java.util.Set;
@@ -20,6 +22,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import modelo.Album;
+import modelo.Foto;
 import modelo.Persona;
 /**
  * FXML Controller class
@@ -122,6 +126,8 @@ public class CrearPersonaController implements Initializable {
 
     @FXML
     private void actualizarPersona(ActionEvent event) {
+        Persona vieja=null;
+        Persona nueva=null;
         creacionPersonaEnArchivoNuevo = true;
         //Obtenemos el conjunto de personas
         try{
@@ -130,18 +136,26 @@ public class CrearPersonaController implements Initializable {
             for(Persona p : listaPersonas){
                 //#####################OJO CON ESTA LINEA
                 if(p.getId().equals(personaActualizar.getId())){
+                    vieja=new Persona(p.getNombre(),p.getApellido());
+                    vieja.setId(p.getId());
+//                    vieja=p;
                     //Removemos a la persona
                     p.setNombre(txtNombre.getText());
                     
                     p.setApellido(txtApellido.getText());
                     p.setNombreCompleto(txtNombre.getText()+" "+txtApellido.getText());
-                    
+                    nueva=p;
+                    System.out.println(PersonasEnSistemaController.personaNueva);
                     
                     if(p.getNombre().equals("")||p.getApellido().equals("")){
                         throw  new EmptyFieldsException();
                     }
                 }
+            
+                
             }
+            System.out.println(personaActualizar);
+            editar(personaActualizar,nueva,Album.leerArchivoAlbumes(App.pathAlbumes));
             System.out.println("Lista actualizada>>>"+listaPersonas);
             //Se actualiza el archivo
             Persona.actualizarListaPersonas(listaPersonas, App.pathPersonas); 
@@ -187,5 +201,33 @@ public class CrearPersonaController implements Initializable {
         txtApellido.setText(p.getApellido());
         personaActualizar = p;
     }
+    
+            public void editar(Persona vieja,Persona nueva, LinkedList<Album> albumes){
+                System.out.println(nueva);
+                System.out.println(vieja);
+               Comparator<Persona> cmp1 = (Persona p1,Persona p2) -> p1.getNombre().toLowerCase()
+                      .compareTo(p2.getNombre().toLowerCase());
+               Comparator<Persona> cmp2 = (Persona p1,Persona p2) -> p1.getApellido().toLowerCase()
+                       .compareTo(p2.getApellido().toLowerCase());
+               Comparator<Persona> cmp3 = (Persona p1,Persona p2) -> p1.getId().toLowerCase()
+                       .compareTo(p2.getId().toLowerCase());               
+                   for(Album album:albumes ){
+                       CircularDoublyLinkedList<Foto> fotos=album.getFotos();
+                           for(int i=0;i<fotos.size();i++){
+                               Set<Persona> personas=fotos.get(i).getPersonas();
+                               for(Iterator<Persona> j = personas.iterator(); j.hasNext();){
+                                   Persona persona=j.next();
+                                   if(cmp3.compare(vieja, persona)==0){
+                                       vieja.setNombre(nueva.getNombre());
+                                       vieja.setApellido(nueva.getApellido());
+                                       vieja.setNombreCompleto(nueva.getNombreCompleto());
+                                   }
+                                   persona.actualizarListaPersonas(personas, App.pathPersonas);
+                               }
+                           }
+                           Album.actualizarAlbum(album, App.pathAlbumes);
+
+                   }
+        }
 
 }

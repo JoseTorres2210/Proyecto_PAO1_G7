@@ -52,6 +52,10 @@ public class CrearPersonaController implements Initializable {
         buttonActualizar.setVisible(false);
     }    
     
+    public Persona getPersonaActualizar(){
+        return personaActualizar;
+    }
+    
     @FXML
     private void crearPersona(ActionEvent event) {
         //Se recuperan los valores de los campos especificados

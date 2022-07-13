@@ -144,7 +144,7 @@ public class PersonasEnSistemaController implements Initializable {
             fxmlLoader.setController(ct);//se asigna el controlador
             ct.llenarCampos(p); 
             App.changeRoot(root);
-            editarPersona(p,Album.leerArchivoAlbumes(App.pathAlbumes));
+//            editarPersona(vieja,nueva,Album.leerArchivoAlbumes(App.pathAlbumes));
             tvPersonasRegistradas.refresh();
             
         }catch (IOException ex) {
@@ -195,28 +195,29 @@ public class PersonasEnSistemaController implements Initializable {
         }
     }
     
-    public void editarPersona(Persona p, LinkedList<Album> albumes){
-        Comparator<Persona> cmp1 = (Persona p1,Persona p2) -> p1.getNombre().toLowerCase()
-               .compareTo(p2.getNombre().toLowerCase());
-        Comparator<Persona> cmp2 = (Persona p1,Persona p2) -> p1.getApellido().toLowerCase()
-                .compareTo(p2.getApellido().toLowerCase());
-            for(Album album:albumes ){
-                CircularDoublyLinkedList<Foto> fotos=album.getFotos();
-                    for(int i=0;i<fotos.size();i++){
-                        Set<Persona> personas=fotos.get(i).getPersonas();
-                        for(Persona persona : personas){
-                            if(cmp1.compare(p, persona)==0 && cmp2.compare(p, persona)==0){
-                                persona.setNombre(p.getNombre());
-                                persona.setApellido(p.getApellido());
-                                persona.setNombreCompleto(p.getNombreCompleto());                           
-                            }
-                        }
-                    }
+        public void editarPersona(Persona vieja,Persona nueva, LinkedList<Album> albumes){
+               Comparator<Persona> cmp1 = (Persona p1,Persona p2) -> p1.getNombre().toLowerCase()
+                      .compareTo(p2.getNombre().toLowerCase());
+               Comparator<Persona> cmp2 = (Persona p1,Persona p2) -> p1.getApellido().toLowerCase()
+                       .compareTo(p2.getApellido().toLowerCase());
+                   for(Album album:albumes ){
+                       CircularDoublyLinkedList<Foto> fotos=album.getFotos();
+                           for(int i=0;i<fotos.size();i++){
+                               Set<Persona> personas=fotos.get(i).getPersonas();
+                               for(Iterator<Persona> j = personas.iterator(); j.hasNext();){
+                                   Persona persona=j.next();
+                                   if(cmp1.compare(vieja, persona)==0 && cmp2.compare(vieja, persona)==0){
+                                       vieja.setNombre(nueva.getNombre());
+                                       vieja.setApellido(nueva.getApellido());
+                                       vieja.setNombreCompleto(nueva.getNombreCompleto());
+                                   }
+                                   persona.actualizarListaPersonas(personas, App.pathPersonas);
+                               }
+                           }
+                           Album.actualizarAlbum(album, App.pathAlbumes);
 
-            }
-            
-        
-    }
+                   }
+        }
     
         public void eliminarPersona(Persona p, LinkedList<Album> albumes){
         Comparator<Persona> cmp1 = (Persona p1,Persona p2) -> p1.getNombre().toLowerCase()

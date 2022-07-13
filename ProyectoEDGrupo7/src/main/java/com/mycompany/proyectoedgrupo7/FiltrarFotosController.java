@@ -107,6 +107,22 @@ public class FiltrarFotosController implements Initializable{
                 listaFotosFiltradas= filtrarLugarFoto(listaFotosFiltradas,txtLugar.getText());
             }
         }
+        if(filtrarPalabrasClave.isSelected()){
+            String[] palabras=txtPalabrasClave.getText().split(" ");
+            String primero=palabras[0];
+            if(listaFotosFiltradas.isEmpty()){
+                listaFotosFiltradas= filtrarClavesAlbum(lista,primero);
+            }
+            else{
+                listaFotosFiltradas= filtrarClavesFoto(listaFotosFiltradas,primero);
+            }
+            int counter=1;
+            while(counter<palabras.length){
+                String tmp=palabras[counter];
+                listaFotosFiltradas= filtrarClavesFoto(listaFotosFiltradas,tmp);   
+                counter++;
+            }
+        }        
     }
 
     @FXML
@@ -269,5 +285,33 @@ public class FiltrarFotosController implements Initializable{
         
         
         App.setRoot("mostrarResultadosFiltro");
+    }
+
+    private CircularDoublyLinkedList<Foto> filtrarClavesAlbum(LinkedList<Album> albumes, String palabra) {
+        CircularDoublyLinkedList<Foto> result=new CircularDoublyLinkedList<Foto>();
+        for(Album album:albumes){
+            CircularDoublyLinkedList<Foto> fotos=filtrarClavesFoto(album.getFotos(), palabra);
+            for(int i=0;i<fotos.size();i++){
+                result.addLast(fotos.get(i));
+            } 
+        }
+        return result;
+    }
+    
+
+    private CircularDoublyLinkedList<Foto> filtrarClavesFoto(CircularDoublyLinkedList<Foto> fotos, String palabra) {
+        CircularDoublyLinkedList<Foto> resultado=new CircularDoublyLinkedList<Foto>();
+            for(int i=0;i<fotos.size();i++){
+                String descripcion=fotos.get(i).getDescripcion();
+                String[] palabras=descripcion.split(" ");
+                for(String p: palabras){
+                    if(p.equals(palabra)){
+                        resultado.addLast(fotos.get(i));
+                        break;
+                    }
+                }
+            }
+
+        return resultado;
     }
 }
